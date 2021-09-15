@@ -10,7 +10,7 @@ import axios from 'axios'
 import { Button } from 'antd'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
-// import { toggleLoginDialog } from 'actions/ui'
+import { toggleLoginDialog } from '../../../actions/ui'
 
 const HeartIcon = (props) => {
   const { visible, added, onClick } = props
@@ -46,7 +46,6 @@ const WishlistButton = (props) => {
   const [added, setAdded] = useState(false)
   const [visible, setVisible] = useState(false)
   const isGuest = useSelector((state: any) => state.auth.isGuest)
-  console.log('isGuest', isGuest)
 
   const dispatch = useDispatch()
   const { product } = props
@@ -68,7 +67,7 @@ const WishlistButton = (props) => {
 
   const handleClick = useCallback(async () => {
     if (isGuest) {
-      // dispatch(toggleLoginDialog(true))
+      dispatch(toggleLoginDialog(true))
       return
     }
     if (!added) {
