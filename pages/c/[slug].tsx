@@ -1,8 +1,5 @@
-import React, { useEffect } from 'react'
-import Layout from 'components/Layout'
-// import ProductPage from 'components/Product/ProductPage'
-import ProductsSearchCommon from '../../components/ProductsSearchCommon'
-import { useRouter } from 'next/router'
+import React from 'react'
+import ProductsSearchCommon from 'components/ProductsSearchCommon'
 import axios from 'axios'
 import { wrapper } from 'store'
 import { fetchConfig } from 'actions/config'
@@ -10,7 +7,7 @@ import { fetchCategories } from 'actions/categories'
 import { END } from 'redux-saga'
 import qs from 'qs'
 
-const Category = ({ data, pageQuery }: any) => {
+const Category = ({ data, pageQuery, breadcrumb }: any) => {
   const category = data ? data.category : null
   return (
     <ProductsSearchCommon
@@ -19,6 +16,7 @@ const Category = ({ data, pageQuery }: any) => {
       data={data}
       title={category ? category?.name : ''}
       category={category}
+      breadcrumb={breadcrumb}
       nextSeoConfig={{
         title: category ? category?.name : '',
         description: category ? category.description : ''
@@ -65,7 +63,32 @@ export const getServerSideProps = wrapper.getServerSideProps(
       }
 
       const data = res.data
-      return { props: { data: data, pageQuery: query } }
+
+      const breadcrumb = [{ name: 'Home', as: '/', href: '/' }]
+
+      if (data.category && Array.isArray(data.category.ancestors)) {
+        for (let i = 0; i < data.category.ancestors.length; i++) {
+          try {
+            breadcrumb.push({
+              name: data.category.ancestors_name[i],
+              as: `/c/${data.category.ancestors_slug[i]}`,
+              href: `/category?categorySlug=${data.category.ancestors_slug[i]}`
+            })
+          } catch (e) {
+            console.log(e)
+          }
+        }
+      }
+
+      if (data && data.category && data.category.name) {
+        breadcrumb.push({
+          name: data.category.name,
+          as: `/c/${data.category.slug}`,
+          href: `/category?categorySlug=${data.category.slug}`
+        })
+      }
+
+      return { props: { data: data, pageQuery: query, breadcrumb: breadcrumb } }
     } catch (e) {
       console.log('getServerSideProps', e)
       return { props: {} }

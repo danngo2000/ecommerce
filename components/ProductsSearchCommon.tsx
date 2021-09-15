@@ -25,16 +25,19 @@ interface TypeProps {
   title: string
   category: any
   nextSeoConfig: any
+  breadcrumb?: any
 }
 
 const ProductsSearchCommon: FC<TypeProps> = (props) => {
   const descriptionBox = React.createRef()
-  const { pageName, query, data, title, category, nextSeoConfig } = props
+  const { pageName, query, data, title, category, nextSeoConfig, breadcrumb } =
+    props
   const products = data ? data.data : null
   const [scrolled, setScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [rating, setRating] = useState()
   const [sortBy, setSortBy] = useState('')
+ 
 
   const config = useSelector((state: any) => state.config)
 
@@ -167,6 +170,7 @@ const ProductsSearchCommon: FC<TypeProps> = (props) => {
 
   return (
     <Layout
+      breadcrumb={breadcrumb}
       pageName={`categories-${pageName} categories`}
       q={query && query.q ? query.q : ''}
     >
@@ -202,28 +206,28 @@ const ProductsSearchCommon: FC<TypeProps> = (props) => {
               </div>
 
               <SearchSidebar
-                 minPrice={data.meta.min_price}
-                 maxPrice={data.meta.max_price}
-                 categories={data.facet.categories}
-                 brands={data.facet.brands}
-                 attributes={data.facet.attributes}
-                 attributesMeta={data.meta.attributes}
-                 brandsMeta={data.meta.brands}
-                 brandsSelected={query.brands}
-                 category={data.category}
-                 range={query.price}
-                 limit={query.limit}
-                 sortBy={query.sortBy}
-                 attrsSelected={query.attrs}
-                 q={query.q}
-                 categorySlug={query.categorySlug}
-                 pageName={pageName}
-                 rating={query.rating}
-                 onRangeChange={handleRangeChange}
-                 onBrandChange={handleBrandChange}
+                minPrice={data.meta.min_price}
+                maxPrice={data.meta.max_price}
+                categories={data.facet.categories}
+                brands={data.facet.brands}
+                attributes={data.facet.attributes}
+                attributesMeta={data.meta.attributes}
+                brandsMeta={data.meta.brands}
+                brandsSelected={query.brands}
+                category={data.category}
+                range={query.price}
+                limit={query.limit}
+                sortBy={query.sortBy}
+                attrsSelected={query.attrs}
+                q={query.q}
+                categorySlug={query.categorySlug}
+                pageName={pageName}
+                rating={query.rating}
+                onRangeChange={handleRangeChange}
+                onBrandChange={handleBrandChange}
                 //  onAttributesChange={handleAttributesChange}
-                 onRatingChange={handleRatingChange}
-                 sellerSlug={query && query.sellerSlug ? query.sellerSlug : ''}
+                onRatingChange={handleRatingChange}
+                sellerSlug={query && query.sellerSlug ? query.sellerSlug : ''}
               />
 
               <div className='btn-groups center'>

@@ -20,6 +20,6 @@
     "jsx": "preserve",
     "noImplicitAny": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/TheHeader/index.tsx", "components/TheHeader/SearchInput.js", "components/Cart/MiniCart.js", "components/Product/Notice/Stock.js", "components/RetinaImage.js", "components/Index/ProductCategoriesSuper.js", "components/Product/ProductItem.js", "components/Index/IconSlider.js", "components/Search/ConditionFilter.js", "components/Search/SearchSiderbar/index.js", "components/Search/SearchSiderbar/Ratings.js", "components/Product/Price.tsx", "components/Product/ProductConent/index2.tsx", "components/Product/Reviews/index.js", "components/Product/Reviews/AllImagePopup/index.js", "components/Product/Reviews/ImagePopup/Images.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/TheHeader/index.tsx", "components/TheHeader/SearchInput.js", "components/Cart/MiniCart.js", "components/Product/Notice/Stock.js", "components/RetinaImage.js", "components/Index/ProductCategoriesSuper.js", "components/Product/ProductItem.js", "components/Index/IconSlider.js", "components/Search/ConditionFilter.js", "components/Search/SearchSiderbar/index.js", "components/Search/SearchSiderbar/Ratings.js", "components/Product/Price.tsx", "components/Product/ProductConent/index2.tsx", "components/Product/Reviews/index.js", "components/Product/Reviews/AllImagePopup/index.js", "components/Product/Reviews/ImagePopup/Images.js", "components/Breadcrumb.js"],
   "exclude": ["node_modules"]
 }
