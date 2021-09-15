@@ -1,0 +1,22 @@
+{
+  "Shipping": "Đang giao hàng",
+  "Refunded": "Hoàn tiền",
+  "Pending": "Đang chờ",
+  "Paid": "Đã thanh toán",
+  "Completed": "Hoàn thành",
+  "On hold": "Tạm dừng",
+  "Cancelled": "Đã hủy",
+  "Payment Failed": "Thanh toán thất bại",
+  "(Waiting payment)": "(Đang chờ thanh toán)",
+  "Order Paid": "Đơn hàng đã thanh toán",
+  "Payment verifield": "Thanh toán xác thực",
+	"Refund Order": "Hoàn lại tiền cho đơn đặt hàng",
+	"Refund/Return Order": "Hoàn tiền / Trả lại đơn đặt hàng",
+	"Order received":"Đã nhận được đơn hàng",
+  "Why do you want to refund this order?":"Tại sao bạn muốn trả lại đơn hàng này?",
+  "Are you sure to return this order?":"Bạn có chắc chắn để trả lại đơn đặt hàng này?",
+  "Return Order":"Trả lại đơn hàng",
+  "You cannot return this order":"Bạn không thể trả lại đơn đặt hàng này",
+  "Order received successfully":"Đơn hàng đã nhận thành công",
+  "Request return order successfully":"Yêu cầu trả lại đơn đặt hàng thành công"
+}
