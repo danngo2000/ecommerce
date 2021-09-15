@@ -1,0 +1,7 @@
+:root {
+    --main-font-color: #ccc;
+    --dark-red-color: #ff890a;
+    --bright-red-color: #ffac1c;
+    --red-color: #ff890a;
+    --header-gradient: linear-gradient(to right, var(--dark-red-color) 0%, var(--bright-red-color) 28%, var(--dark-red-color) 100%);
+}

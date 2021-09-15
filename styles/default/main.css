@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700,900&amp;subset=vietnamese');
+
+@import 'vendors/normalize';
+@import 'vendors/blueprint';
+
+/* --------------- SELECT BASE VARIABLES ---------------------------- */
+@import 'partials/base';
+@import 'partials/antdesign';
+
+@import 'mixins/animation';
+@import 'mixins/display';
+@import 'mixins/mediaquery';
+
+
+@import 'layout/layout';
+@import 'layout/grid';
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/goTopButton';
+
+/* --------------- STARTING IMPORT SCSS---------------- */
+@import 'partials/flex';
+@import 'partials/core';
+
+@import 'partials/pagination';
+
+/* @import 'pages/customer'; */
+@import 'pages/order';
+@import 'pages/landing';
+/* @import 'pages/blog'; */
+@import 'pages/recipe';
+@import 'pages/recipecontent';
+
+@import 'pages/community';
+
+@import 'pages/category';
+@import 'pages/seller-intro';
+
+/* @import 'pages/premium'; */
+@import 'pages/video';
+
+
+/* ---------------- END IMPORT SCSS---------------- */
+
+/* --------------- Import modules ---------------- */
+
+@import 'components/box';
+@import 'components/btn';
+@import 'components/form';
+@import 'components/minicart';
+/* @import 'components/modal'; */
+@import 'components/nprogress';
+@import 'components/rating';
+/* @import 'components/review'; */
+/* @import 'components/tab'; */
+
+@import 'components/swiper';
+
+@import 'components/slider';
+
+
+/* --------------- EXTEND DEFAULT THEME ----------------------------- */
+@import 'partials/footer';
+@import 'pages/product';
+
+@import 'partials/header';
+
+@import 'mixins/mediaquery';
+
+@import 'pages/theme.green';
+@import 'pages/listproduct';
+
+
+@import 'pages/cart';
+
+
+@import 'components/slick';

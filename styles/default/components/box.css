@@ -1,0 +1,45 @@
+.main-box {
+    background: $color-white;
+    padding: 15px 30px;
+    margin-bottom: 15px;
+        .reviewBtnWrapper{
+            .goods-reviews-entry {
+                display: table-cell;
+                vertical-align: middle;
+            }
+        }
+        &.productDetailTab {
+            padding: 15px 15px;
+            .ant-tabs-tab-active {
+                .ant-tabs-tab-btn {
+                    color: #ee4d2d
+                }
+            }
+            .ant-tabs-tab:hover {
+                color: #ee4d2d
+            }
+            .ant-tabs-ink-bar {
+                background-color: #ee4d2d;
+                height: 5px;
+            }
+        }
+        .review-fliter {
+            .ant-tabs-tab-active {
+                .ant-tabs-tab-btn {
+                    color: #000 !important;
+                    background-color: #ffda00;
+                    font-weight: 700;
+                }
+            }
+        }
+}
+.productImage {
+    @include mediaquery-sm {
+        padding: 0;
+        padding-bottom: 15px;
+        .col1 {
+            padding: 0;
+    	}
+    }
+    
+}

@@ -1,0 +1,444 @@
+/* ------- INPUT AND BUTTON  --------*/
+
+label {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 12px;
+  color: #333;
+}
+
+input.bp3-input,
+input[type='text'],
+input[type='email'],
+input[type='number'],
+select,
+textarea,
+select,
+.bp3-select.dropdown select {
+  width: 100%;
+  display: block;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  border: 1px solid #d9d9d9;
+  &::placeholder {
+    color: #999;
+  }
+  line-height: unset;
+  @include mediaquery-sm() {
+    font-size: 16px !important;
+    margin-right: unset;
+  }
+}
+textarea {
+  border: 1px solid #d9d9d9;
+  color: rgba(0, 0, 0, 0.65);
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+.goBackBtn {
+  color: #106ba3;
+  display: inline-block;
+  &:hover {
+    cursor: pointer;
+    color: #333;
+    text-decoration: underline;
+  }
+}
+.bp3-button.btn.lightBtn {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #757575;
+  background-color: #eff0f5;
+  background-image: none;
+  &:hover {
+    color: #000;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+.button,
+button,
+optgroup {
+  font-family: 'Roboto';
+  font-size: 100%;
+  line-height: 1.15;
+  outline: none;
+  box-shadow: none;
+  margin: 0;
+  &:hover {
+    outline: none;
+    box-shadow: none;
+  }
+}
+.bp3-input {
+  &:focus {
+    outline: none;
+    box-shadow: none !important;
+  }
+}
+button:focus,
+a:focus,
+select:focus {
+  outline: 0;
+}
+
+.btn,
+.bp3-button.bp3-intent-danger,
+.bp3-button.bp3-intent-primary.btn,
+.bp3-button.bp3-intent-danger.btn,
+.bp3-button.btn {
+  display: inline-block;
+  transition: all 0.3s;
+  border-radius: 3px;
+  font-size: 12px;
+  border: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  padding: 15px 20px;
+  background: #444;
+  color: #fff;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px 0 rgba(98, 98, 98, 0.43);
+  &:hover {
+    outline: none;
+    color: #f2f2f2;
+    background: #333;
+  }
+
+  &.btn-reverse {
+    background: $color-white;
+    border: 1px solid $buttonColor;
+    color: $buttonColor;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-transform: none;
+    transition: 0.3s;
+    width: 100%;
+
+    &:hover {
+      background: $buttonColor;
+      color: #f2f2f2;
+      box-shadow: none;
+    }
+  }
+}
+.bp3-button.btn-primary {
+  padding: 10px 30px;
+  font-size: 14px;
+  margin-top: 20px;
+  box-shadow: none !important;
+  border-radius: 0;
+
+  &.btn-sm {
+    font-size: 14px;
+    height: 30px;
+    margin: 0;
+    padding: 6px 20px;
+    .bp3-button-text {
+      align-items: center;
+      display: flex;
+      img {
+        margin-right: 8px;
+        width: 16px;
+      }
+    }
+  }
+}
+a:hover {
+  .bp3-button {
+    span {
+      text-decoration: none;
+    }
+  }
+}
+.btn-basic,
+input[type='button'].btn-basic {
+  color: #444444;
+  background: none;
+  border: 1px #cccccc solid;
+}
+
+.btn.active {
+  box-shadow: none;
+}
+
+.btn-primary:not([disabled]) {
+  color: #ffffff !important;
+  background: $buttonColor !important;
+
+  border: 1px solid $buttonColor !important;
+  padding: 6px;
+  transition: 0.5s;
+}
+
+.btn-primary[disabled] {
+  background: #999999 !important;
+  border: 1px solid #999999 !important;
+  color: #ffffff !important;
+  padding: 6px;
+
+  &:focus,
+  &:hover {
+    background: #999999 !important;
+    border: 1px solid #999999 !important;
+  }
+}
+
+.btn-primary:not([disabled]):hover,
+.btn-primary:not([disabled]):focus {
+  background: $buttonHoverColor !important;
+  border-color: $buttonHoverColor !important;
+}
+
+.btn-primary-default {
+  background: none;
+  border: 1px $buttonColor solid;
+}
+
+.btn-primary-default * {
+  color: $buttonColor;
+}
+
+.btn-primary-default.active {
+  background: none;
+  border: 1px #1d7db6 solid;
+}
+
+.btn-primary-default.active * {
+  color: #1d7db6;
+}
+
+.btn-secondary,
+.outofstock-notify button {
+  color: #ffffff !important;
+  background: #098edc !important;
+  border: 1px solid #098edc !important;
+}
+
+.outofstock-notify input[type='email'] {
+  -webkit-appearance: none;
+  box-shadow: none !important;
+  border: 1px #ffffff solid !important;
+}
+
+.btn-secondary:hover {
+  color: #ffffff;
+  background: #1d7db6;
+}
+
+.btn-info {
+  font-size: 1.4em;
+  color: #ffffff;
+  text-transform: uppercase;
+  display: inline-block;
+  background: #5bc0de;
+  border-radius: 5px;
+  border: 1px #5bc0de solid;
+  padding: 6px 12px;
+}
+
+.btn-info:hover {
+  color: #ffffff;
+  background: #2aabd2;
+  border: 1px 269abc solid;
+}
+
+.btn-filter {
+  background: #000000 !important;
+  border: 1px #000000 solid !important;
+}
+
+.btn-cancel {
+  background: #494a4a !important;
+  border: 1px #494a4a solid !important;
+}
+.contentBox {
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  background: #fff;
+  opacity: 1;
+  &.fill {
+    width: 100%;
+  }
+}
+.bp3-button.bp3-disabled.bp3-intent-danger.btn-green {
+  cursor: not-allowed;
+  background: #ccc;
+  border: none;
+  &:hover {
+    background: #ccc;
+    border: none;
+  }
+}
+.bp3-button.bp3-intent-danger.btn-green {
+  font-size: 14px;
+  color: $color-white;
+  background-color: $color-green;
+  background-image: none;
+  border: 1px $color-green solid;
+  border-radius: 0;
+  box-shadow: none;
+  height: 45px;
+  padding: 6px 12px;
+  transition: 0.5s;
+
+  img {
+    margin-right: 20px;
+    width: 25px;
+  }
+
+  &.btn-md {
+    padding: 6px 50px;
+    .bp3-button-text {
+      align-items: center;
+      display: flex;
+      .hydrated {
+        height: 23px;
+        padding-right: 22px;
+        width: 25px;
+      }
+    }
+  }
+
+  &.btn-sm {
+    font-size: 14px;
+    height: 30px;
+    padding: 6px 12px;
+    .bp3-button-text {
+      align-items: center;
+      display: flex;
+      img {
+        margin-right: 8px;
+        width: 16px;
+      }
+    }
+  }
+
+  &:hover {
+    background-color: darken($color-green, 5%);
+    border: 1px darken($color-green, 5%) solid;
+    box-shadow: none;
+  }
+}
+
+.share-social {
+  align-items: center;
+  display: flex;
+  padding: 30px 0;
+}
+
+.SocialMediaShareButton {
+  -webkit-tap-highlight-color: transparent;
+  &:focus {
+    outline: none;
+  }
+  .btn-social {
+    background: $color-gray-60;
+    border-radius: 13px;
+    display: inline-block;
+    height: 26px;
+    line-height: 30px;
+    margin-left: 10px;
+    text-align: center;
+    transition: 0.3s;
+    width: 26px;
+    svg {
+      fill: $color-white;
+      height: 14px;
+      .path {
+        &:focus {
+          outline: unset;
+          outline-offset: unset;
+        }
+      }
+      &:focus {
+        outline: unset;
+      }
+    }
+
+    &.fb {
+      &:hover {
+        background-color: $color-fb;
+      }
+      img {
+        width: 1rem;
+        vertical-align: unset;
+      }
+    }
+
+    &.twitter {
+      /* margin-right: 25px; */
+      &:hover {
+        background-color: $color-twitter;
+      }
+      &:focus {
+        outline: unset;
+      }
+      img {
+        width: 1rem;
+        vertical-align: unset;
+      }
+      @include mediaquery-max($breakpoint-sm) {
+        margin-right: 0;
+      }
+    }
+
+    &.linkedin {
+      &:hover {
+        background-color: $color-linkedin;
+      }
+    }
+
+    &.instagram {
+      margin-right: 25px;
+      &:hover {
+        background-color: $color-instagram;
+      }
+    }
+  }
+}
+
+select {
+  line-height: normal;
+  width: 100%;
+  height: 51px;
+  padding: 3px 12px;
+  /* border-radius: 1px;
+   border: 1px solid silver; */
+  background: #ffffff;
+  &:disabled {
+    color: #dadada;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+    cursor: not-allowed;
+  }
+}
+
+.pink-theme .twitter {
+  display: none;
+}
+
+.order-received {
+  .button-outline {
+    background-color: #fff !important;
+    border-radius: 3px;
+    border: 1px solid #f14a2d !important;
+    color: #f14a2d !important;
+  }
+  .button-refund {
+    background-color: #fff !important;
+    border-radius: 3px;
+    border: 1px solid #f14a2d !important;
+    color: #f14a2d !important;
+  }
+  .button-received {
+    background-color: #f14a2d !important;
+    border-radius: 3px;
+    border: none !important;
+  }
+}

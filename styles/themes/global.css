@@ -1,0 +1,11 @@
+:root {
+    --dark-red-color: #d80638;
+    --bright-red-color: #d80638;
+    --red-color: #d80638;
+
+    --yellow-color: #fae176;
+    --bright-yellow-color: #fff5b0;
+    --green-color: #d80638;
+
+    --header-gradient: linear-gradient(to right, #fae176, #fff5b0, #fae176);
+}

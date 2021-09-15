@@ -1,0 +1,165 @@
+
+/* ---------- nprogress - Make clicks pass-through -------------  */
+#nprogress {
+    pointer-events: none;
+  }
+  
+  #nprogress .bar {
+    opacity: 0.5;
+    background: $progressLineColor;
+  
+    position: fixed;
+    z-index: 1031;
+    top: 0;
+    left: 0;
+  
+    width: 100%;
+    height: 2px;
+
+    @include mediaquery-max($breakpoint-md) {
+      background: #ee4d2d;
+      opacity: 0.5;
+      height: 2.5px;
+    }
+  }
+  
+  /* Fancy blur effect */
+  #nprogress .peg {
+    display: block;
+    position: absolute;
+    right: 0px;
+    width: 100px;
+    height: 100%;
+    box-shadow: 0 0 10px $progressLineColor, 0 0 5px $progressLineColor;
+    opacity: 1.0;
+  
+    -webkit-transform: rotate(3deg) translate(0px, -4px);
+        -ms-transform: rotate(3deg) translate(0px, -4px);
+            transform: rotate(3deg) translate(0px, -4px);
+  }
+  
+  /* Remove these to get rid of the spinner */
+  #nprogress .spinner {
+    @include mediaquery-min($breakpoint-md) {
+      display: block;
+      position: fixed;
+      z-index: 1031;
+      top: 15px;
+      right: 15px;
+    }
+  }
+  
+  #nprogress .spinner-icon {
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+  
+    border: solid 2px transparent;
+    border-top-color: $progressLineColor;
+    border-left-color: $progressLineColor;
+    border-radius: 50%;
+  
+    -webkit-animation: nprogress-spinner 400ms linear infinite;
+            animation: nprogress-spinner 400ms linear infinite;
+  }
+  
+  .nprogress-custom-parent {
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .nprogress-custom-parent #nprogress .spinner,
+  .nprogress-custom-parent #nprogress .bar {
+    position: absolute;
+  }
+  
+  @-webkit-keyframes nprogress-spinner {
+    0%   { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  @keyframes nprogress-spinner {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  /*   --- end ----- */
+  
+  .bp3-progress-bar {
+    height: 10px!important;
+    display: block;
+    position: relative;
+    border-radius: 40px;
+    background: rgba(92, 112, 128, 0.2);
+    width: 100%;
+    overflow: hidden;
+    padding: 3px 5px;
+}
+.bp3-progress-bar.bp3-no-stripes.custom-progress-bar {
+  background: $color-border;
+  .bp3-progress-meter {
+    background:linear-gradient(90deg, #f15826 0%, #e51e79 49%, #6a2d91 100%) !important;
+    background: -moz-linear-gradient(left, rgba(84,179,6,1) 0%, rgba(186,232,35,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(84,179,6,1)), color-stop(100%, rgba(186,232,35,1)));
+    background: -webkit-linear-gradient(left, rgba(84,179,6,1) 0%, rgba(186,232,35,1) 100%);
+    background: -o-linear-gradient(left, rgba(84,179,6,1) 0%, rgba(186,232,35,1) 100%);
+    background: -ms-linear-gradient(left, rgba(84,179,6,1) 0%, rgba(186,232,35,1) 100%);
+    background: linear-gradient(to right, rgba(84,179,6,1) 0%, rgba(186,232,35,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#54b306', endColorstr='#bae823', GradientType=1 );
+    position: absolute;
+    border-radius: 40px;
+    width: 100%;
+    height: 6px;
+    -webkit-transition: width 200ms cubic-bezier(0.4, 1, 0.75, 0.9);
+    transition: width 200ms cubic-bezier(0.4, 1, 0.75, 0.9);
+  }
+}
+
+.shipping-progressbar-container {
+  position: relative;
+  padding-right: 28px;
+
+  .freeshipping-truck {
+    position: absolute;
+    right: 0;
+
+    .truck-icon {
+      background: $color-border;
+      border-radius: 50%;
+      height: 30px;
+      text-align: center;
+      width: 30px;
+
+      img {
+        width: 18px;
+        opacity: 0.6;
+      }
+
+    }
+
+    .tooltip {
+      font-size: 11px;
+      background: #CA4A7E;
+      color: #fff;
+      padding: 3px 0;
+      position: absolute;
+      right: -12px;
+      text-align: center;
+      text-transform: uppercase;
+      top: -24px;
+      width: 50px;
+
+      &:before {
+        border-top: 7px solid #CA4A7E;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        content: "";
+        height: 0;
+        position: absolute;
+        right: 17px;
+        top: 21px;
+        width: 0;
+      }
+    }
+  }
+}
+
+

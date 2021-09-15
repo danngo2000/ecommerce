@@ -1,0 +1,28 @@
+.bp3-tabs.tabs {
+    .bp3-tab-list {
+        border-bottom: 1px solid $color-border;
+    }
+    .bp3-tab-indicator-wrapper ~ .bp3-tab {
+        padding-bottom: 10px;
+    }
+    
+    .bp3-tab {
+        color: $color-black;
+        font-family: $font-family-bold;
+        font-size: 16px;
+
+        &:hover {
+            color: $color-dark-pink;
+        }
+
+        &:focus,
+        &:active {
+            outline: none;
+        }
+    }
+
+    .bp3-tab-indicator-wrapper .bp3-tab-indicator {
+        background-color: $color-dark-pink;
+        height: 5px;
+    }
+}

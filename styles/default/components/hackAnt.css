@@ -1,0 +1,11 @@
+.ant-slider-handle.ant-tooltip-open {
+    border-color: #5e6367;
+}
+.ant-slider-track {
+    background-color: #676767;
+}
+
+.ant-tooltip {
+    font-size: 11px;
+
+}
