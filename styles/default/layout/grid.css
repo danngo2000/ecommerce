@@ -1,0 +1,116 @@
+.grid-container-fluid,
+.grid-container {
+    display: grid;
+    margin: 0 auto;
+    width: 100%;
+
+    &.reverse {
+        direction: rtl;
+    }
+}
+
+.grid-container {
+    /* width: $containerWidth; */
+    /* @include mediaquery-sm() {
+        width: 95%;
+        max-width: $breakpoint-xl;
+    } */
+
+    /* @include mediaquery-md() {
+        width: 95%;
+    } */
+}
+
+.grid-col {
+    position: relative;
+    padding: 0;
+}
+
+/* @for $i from 1 through $col-num {
+    .grid-#{$i} {
+        grid-template-columns: repeat($i, 1fr);
+        grid-auto-flow: column;
+        grid-column-gap: $col-gutter;
+        grid-row-gap: $col-gutter;
+    }
+
+    @for $j from 1 through $col-num {
+        .grid-col-#{$i}{
+            grid-column-start: $i;
+            grid-column-end:  $i;
+            
+        }
+        .grid-col-#{$i}-#{$j} {
+            grid-column-start: $i;
+            grid-column-end: $j + 1;
+            
+        }
+    }   
+} */
+
+.grid-col-no-gutter {
+    grid-column-gap: 0;
+}
+
+/* @include mediaquery-md() {
+  
+    @for $i from 1 through $col-num {
+      .grid-md-#{$i} {
+        grid-template-columns: repeat($i,1fr);
+        grid-auto-flow: column;
+        grid-column-gap: $col-gutter;
+        grid-row-gap: $col-gutter;
+      }
+
+      @for $j from 1 through $col-num {
+        .grid-col-md-#{$i} {
+            grid-column-start: $i;
+            grid-column-end: $i;
+            }
+
+        .grid-col-md-#{$i}-#{$j} {
+            grid-column-start: $i;
+            grid-column-end: $j + 1;
+            
+            }
+        }   
+    }
+}
+
+@include mediaquery-sm() {
+  
+    @for $i from 1 through $col-num {
+      .grid-sm-#{$i} {
+        grid-template-columns: repeat($i, 1fr);
+        grid-auto-flow: row;
+        grid-column-gap: $col-gutter-half;
+        grid-row-gap: $col-gutter-half;
+      }
+
+      @for $j from 1 through $col-num {
+        .grid-col-sm-#{$i} {
+            grid-column-start: $i;
+            grid-column-end: $i;
+            
+            }
+
+        .grid-col-sm-#{$i}-#{$j} {
+            grid-column-start: $i;
+            grid-column-end: $j + 1;
+            
+            }
+        }   
+    }  
+} */
+
+.justify-start {
+    justify-items: start;
+}
+
+.justify-center {
+    justify-items: center;
+}
+
+.justify-end {
+    justify-items: end;
+}

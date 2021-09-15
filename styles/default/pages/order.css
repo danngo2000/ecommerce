@@ -1,0 +1,42 @@
+.smallContainer.trackingOrderContainer{
+  max-width: 670px;
+}
+.trackingOrderForm {
+  text-align: left;
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+  background-color: #fff;
+  padding: 30px 100px;
+  
+  .fieldInput{
+
+  }
+  .helpText{
+      color: #888;
+      margin: 10px 0px;
+  }
+  input.orderNumber{
+      border: 2px solid #bdc3c7;
+      color: #95a5a6;
+      transition: color linear .2s,border linear .2s;
+      vertical-align: middle;
+      font-size: 17.5px;
+      padding: 13px 6px 12px;
+      border-radius: 4px;
+      outline: 0;
+      width: 100%;
+  }
+  .trackBtn{
+      border: 2px solid #f39c12;
+      text-align: left;
+      background-color: #f39c12;
+      color: #fff;
+      border-radius: 4px;
+      outline: 0;
+      margin-left: 7px;
+      font-size: 17.5px;
+      padding: 11px 30px;
+      margin: 10px 0px;
+  }
+  
+}

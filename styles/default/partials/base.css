@@ -1,0 +1,95 @@
+:root {
+  --main-font-color: #333;
+  --light-font-color: #808080;
+  --top-bar-height: 2rem;
+  --main-bar-height: 6.9rem;
+  --body-bg-color: #fefefe;
+  --main-bar-height-mobile: 5rem;
+  --width: 96%;
+  --font-family: 'Roboto';
+  --font-family-bold: 'Roboto';
+  --font-height: 1.5;
+  --font-size-base: 14px;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-heavy: 700;
+}
+
+$header-transition-duration: var(--header-transition-duration, 0.5s);
+
+$dark-red-color: var(--dark-red-color, #d80638);
+$bright-red-color: var(--bright-red-color, #ef4a54);
+$red-color: var(--red-color, #d80638);
+
+$yellow-color: #fae176;
+$bright-yellow-color: #fff5b0;
+$green-color: #18ad35;
+$gray-color: #656040;
+
+$header-gradient: var(
+  --header-gradient,
+  linear-gradient(90deg, #f15826 0%, #e51e79 49%, #6a2d91 100%)
+);
+$breakpoint-sm: 498px;
+$breakpoint-md: 720px;
+$breakpoint-lg: 996px;
+$breakpoint-xl: 1300px;
+
+/* Layout grid */
+
+$gutter: 4%;
+$col-num: 12;
+$col-gutter: 24px;
+$col-gutter-half: 12px;
+
+/* fonts */
+$font-size-base: 14px;
+
+$topMenuBackground: #333;
+$mainLayoutColor: #333;
+$progressLineColor: #fff;
+$headerTextColor: #fff;
+$headerFontSize: 15px;
+$headerLink: #fff;
+$color-main: #3f3f3f;
+
+/* layout */
+
+$containerWidth: $breakpoint-xl;
+
+/* button */
+$buttonColor: #333;
+$buttonHoverColor: #000;
+
+$headerButtonColor: $buttonColor;
+$headerButtonHeight: 40px;
+$headerButtonHoverColor: $buttonHoverColor;
+
+/* colors */
+$dark-grey: #333447;
+$dark-gray: #333447; /* for the Americans */
+$color-dim-gray: #6e6e6e;
+$color-bg: #f4f4f4;
+$color-white: #fff;
+$color-white-smoke: #f3f3f3;
+$color-dark-pink: #e82959;
+$color-gray-12: #1f1f1f;
+$color-gray-43: #6e6e6e;
+$color-gray-60: #999;
+$color-gray-80: #f2f2f2;
+$color-gray-98: #fafafa;
+$color-gainsboro: #dadada;
+$color-green: #00af41;
+$color-black: #000;
+
+$color-fb: #4267b2;
+$color-twitter: #38a1f3;
+$color-instagram: #bd081c;
+$color-linkedin: #0077b5;
+$color-sonic-silver: #757575;
+$color-border: #ebebeb;
+$color-whisper: #e7e7e7;
+$color-blue-light: #96cdf7;
+$color-vividblue: #34a5fb;
+$color-charcoal: #464646;
+$color-white-smoke: #f5f5f5;

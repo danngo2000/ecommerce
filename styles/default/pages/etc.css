@@ -1,0 +1,219 @@
+.saved-for-later  {
+  margin-bottom: 2rem;
+  .sft-heading {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+  }
+  .sft-wrapper {
+    background: #fff;
+    border-radius: 3px;
+  }
+  .actions-group {
+    //padding-right: 1rem;
+  }
+  .sfl-show-all {
+    border-top: 1px solid #ebebeb;
+    text-align: center;
+    padding: .5rem 0;
+  }
+}
+
+.my-gift-cards {
+  width: 100%;
+  h4 {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+  }
+}
+
+.tabBar {
+  &.categories {
+    @media screen and (max-width: $breakpoint-sm) {
+      display: none;
+    }
+  }
+  align-items: center;
+  background-color: #EBEBEB;
+  .tab {
+    img {
+      height: auto;
+      width: 25px;
+    }
+    &:hover {
+      label { color: $red-color; }
+      .bp3-icon svg { fill: $red-color }
+    }
+  }
+}
+
+.loyalty-payment {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  .container {
+    background: #fff;
+    padding: 2rem 5%;
+  }
+  .intro {
+    padding-bottom: 2rem;
+    h3 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 20px;
+      margin: 0px 0px 20px 0px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    & > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      p {
+        margin: 0;
+      }
+    }
+  }
+  .creditCardIcons {
+    .paypal { display: none; }
+  }
+  button.add-new-card {
+    padding: 0;
+    margin-bottom: 1rem;
+    color: #f75c32;
+    svg {
+      fill: #f75c32;
+    }
+    &:hover {
+      background: #fff;
+      color: #f75c32;
+    }
+  }
+  .new-card {
+    display: flex;
+    justify-content: start;
+    margin-bottom: 2rem;
+    #card-element { width: 100%; }
+    .name-input {
+      width: 100%;
+      max-width: 300px;
+      input {
+        &::placeholder { color: #333; }
+        width: 90%;
+        font-size: 16px;
+        color: #32325d;
+        line-height: 1.2em;
+        
+        box-sizing: border-box;
+        height: 40px;
+        padding: 10px 12px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        background-color: white;
+        box-shadow: 0 0px 7px 0 #dadada;
+        -webkit-transition: box-shadow 150ms ease;
+        transition: box-shadow 150ms ease;
+      }
+    }
+  }
+}
+
+.myLoyalty {
+  $paddingX: 10%;
+
+  margin-top: -30px;
+
+  h2 {
+    margin: 0;
+    margin-bottom: 1rem;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 30px;
+    letter-spacing: 1.2px;
+  }
+  h3 {
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0;
+    padding: 1rem 0;
+  }
+  ul {
+    list-style-type: unset;
+    list-style-position: inside;
+    padding: 0;
+  }
+  p, li {
+    // font-size: 13px;
+    margin: 0;
+  }
+  .banner-wrapper {
+    position: relative;
+    display: flex;
+    img {
+      width: 100%;
+    }
+    .banner {
+      position: absolute;
+      top: 0; right: 0; left: 0; bottom: 0;
+      padding: 0 $paddingX 0 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .left, .right {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+      }
+      .left {
+        width: 60%;
+      }
+      .right {
+        width: 40%;
+        background: #fff;
+        height: 76%;
+        .title {
+          font-size: 16px;
+        }
+        .expired-date {
+          font-size: 24px;
+        }
+        .days-left {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  .payment-method, .cancel {
+    background: #fff;
+    width: 100%;
+    padding: 0 $paddingX;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row wrap;
+  }
+  .payment-method {
+    min-height: 5rem;
+    .card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  .cancel {
+    margin-top: 1rem;
+    min-height: 10rem;
+    h3 {
+      border-bottom: 1px solid #ccc;
+      width: 100%;
+    }
+    .benefits {
+      width: 65%;
+    }
+    .right {
+      width: 33%;
+      text-align: right;
+      button {
+        font-weight: 600;
+      }
+    }
+  }
+}

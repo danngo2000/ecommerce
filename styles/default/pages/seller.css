@@ -1,0 +1,198 @@
+.InfoBox{
+  border-top: 1px solid #eee;
+  padding: 15px 0px;
+  margin: 10px 0 0 0;
+  .title{
+    font-size: 14px;
+    color: #888;
+    font-weight: normal;
+    margin: 0 0 10px 0;
+  }
+  .BoxHeader{
+    display: grid;
+    grid-template-columns: 50px auto;
+    .logo-seller{
+      width: 100%;
+      height: 50px;
+      border-radius: 50%;
+      @include mediaquery-max($breakpoint-sm){
+        width: 100%;
+      }
+      // img{
+      //   width: 50px;
+      //   height: 50px;
+      //   border-radius: 50%;
+      // }
+    }
+    .site-logo{
+      border: 1px solid #e1e1e1;
+      width: 100%;
+      @include mediaquery-max($breakpoint-sm){
+        width: 100%;
+      }
+    }
+    .sellerContent{
+      margin-left: 2rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      @include mediaquery-max($breakpoint-sm){
+        margin-left: 1rem;
+      }
+      .sellerName{
+        color: #333;
+        font-weight: bolder;
+        // width: 130px;
+      }
+      .serviceContent{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .serviceItem{
+          display: flex;
+          align-items: center;
+          width: 33%;
+          img{
+            margin-right: 5px;
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }  
+  }
+}
+
+.categories-seller {
+  .main-content {
+    width: 100%;
+    max-width: unset;
+
+    & > * {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .sellerProductsHeader {
+      width: 100%;
+      max-width: 1300px;
+    }
+
+    .searchProductPage {
+      max-width: $breakpoint-xl;
+      padding-top: 0;
+      .productContainer{
+        margin-top: unset;
+      }
+    }
+  }
+
+  .sideBarNote {
+    background: #fff;
+    padding: 2rem 20px 0;
+    margin: 0;
+    .group {
+      h4 {
+        text-transform: unset;
+        font-weight: 600;
+        letter-spacing: .66px;
+      }
+      div {
+        text-align: justify;
+      }
+    } 
+  }
+
+  .sellerIcon{
+    line-height: 20px;
+    font-size: 13px;
+    color: #888;
+    height: 35px;
+    a{
+      display: flex;
+      color: #666;
+      font-size: 13px;
+      &:hover{
+        color: #000;
+        svg{
+          fill: #000;
+        }
+      }
+      svg{
+        width: 14px;
+        height: 14px;
+        margin-right: 5px;
+        fill: #666;
+        margin-top: 3px;
+      }
+    }
+    .defaultSeller{
+      position: relative;
+      color: #333;
+      margin-right: 10px;
+      &::before{
+        content: ' ';
+        border-bottom: 3px solid #fbd2a4;
+        position: absolute;
+        width: 100%;
+        display: inline-block;
+        bottom: 0px;
+      }
+    }
+  }
+  
+  .sellerProductsHeader {
+    background-color: #1fc8db;
+    background-image: linear-gradient(141deg, #59f7b1 0%, #23b0bf 51%, #438da9 75%);
+    height: 155px;
+    text-align: center;
+    .inner {
+      display: inline-flex;
+      color: #fff;
+      margin-top: 3rem;
+      align-items: center;
+      @include mediaquery-sm{
+        margin-top: 4.5rem;
+        margin-left: 25%;
+      }
+      .image {
+        width: 75px;
+        height: 75px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        border-radius: 50%;
+        box-shadow: .2px .2px 3px 1px #666;
+      }
+      .rightInfo {
+        min-width: 170px;
+        margin-left: 1rem;
+        text-align: left;
+      }
+      .sellerLogo {
+        max-width: 90px;
+        max-height: 90px;
+        margin-right: 15px;
+        text-align: center;
+        -webkit-box-shadow: 1px 1px 28px -10px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 1px 28px -10px rgba(0,0,0,0.75);
+        box-shadow: 1px 1px 28px -10px rgba(0,0,0,0.75);
+        border-radius: 50%;
+      }
+      .sellerName {
+        font-size: 23px;
+        font-weight: bold;
+      }
+      .overall {
+        background: #b6ab97;
+        margin-top: 12px;
+        border-radius: 40px;
+        width: 87%;
+        margin: auto;
+        padding: 5px;
+        margin-top: 12px;
+      }
+    }
+  }
+}

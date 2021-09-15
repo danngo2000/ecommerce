@@ -1,0 +1,205 @@
+.premium {
+  background-color: white !important;
+  padding-top: 5.95rem;
+  // Premium Banner
+  .premium-banner {
+    height: 25rem;
+    position: relative;
+    // Text-Content
+    .premium-banner-text-content {
+      position: absolute;
+      top: 25%;
+      text-align: center;
+      width: 100%;
+      // Title
+      .title {
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+      // Button Trial
+      .button-trial {
+        border-color: #333333;
+        margin-bottom: 1rem;
+        padding: 1rem 3rem;
+        background-color: #333333;
+        box-shadow:   5px 5px 18px #6d6c6c;
+      }
+      // text-detail
+      .text-detail {
+        span {
+          font-weight: 600;
+          text-decoration: underline;
+        }
+      }
+    }
+    // Images Content
+    .premium-banner-images-content {
+      // Wrap Box
+      .wrap-box {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        height: 50%;
+        width: 50%;
+        bottom: -32%;
+        left: 25%;
+        .item {
+          height: 100%;
+          width: 20%;
+          background-color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          -webkit-box-shadow: 1.5px 1.5px 3px 0px rgb(170, 168, 168);
+          -moz-box-shadow: 1.5px 1.5px 3px 0px rgb(170, 168, 168);
+          box-shadow: 1.5px 1.5px 3px 0px rgb(170, 168, 168);
+          .item-content{
+            filter: invert(0.5);
+            transition: all 0.5s;
+            &:hover{
+              filter: unset;
+            }
+          }
+        }
+      }
+    }
+  }
+  // Premium Content Special Price
+  .wrap-content-special-price {
+    margin: 12rem auto 2rem;
+    width: 50%;
+    // Spicial Price
+    .special-price-content {
+      display: flex;
+      justify-content: space-between;
+      .special-price-left-content {
+        width: 50%;
+      }
+      .special-price-right-content {
+        width: 40%;
+        display: flex;
+        align-items: center;
+        .wrap {
+          .title {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+          }
+          .content {
+            font-size: 1rem;
+            color: grey;
+          }
+          .button-trial {
+            padding: 0.7rem 2rem;
+            background-color: #333333;
+            border: unset;
+          }
+        }
+      }
+    }
+  }
+
+  // Premium Content Orther
+  .wrap-content-orther {
+    margin: 4.5rem auto 40px;
+    width: 70%;
+    // Cover-Top
+    .cover-top {
+      display: flex;
+      position: relative;
+      .cover-content {
+        position: absolute;
+        top: 20%;
+        width: 100%;
+        right: 10%;
+        text-align: right;
+        .title {
+          font-size: 2rem;
+          margin-bottom: 0.5rem;
+        }
+        .content {
+          font-size: 1rem;
+          color: grey;
+        }
+        .explore {
+          background-color: #ffdbb9;
+          border-radius: unset;
+          border-color: black;
+          border: 1px solid;
+          padding: 1rem 2rem;
+        }
+      }
+    }
+    // Q&A
+    .q-and-a {
+      margin-top: 8px;
+      margin-bottom: 2rem;
+      // Title
+      .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .left-content {
+          font-weight: 600;
+        }
+        .right-content {
+          text-decoration: underline;
+          color: #ff8d0e;
+          &:hover {
+            text-decoration: underline !important;
+          }
+        }
+      }
+      // Content
+      .content {
+        margin-top: 8px;
+        }
+      }
+    }
+    //Cover Bottom
+    .cover-bottom {
+      display: flex;
+      position: relative;
+      margin-top: 40px;
+      .cover-content {
+        position: absolute;
+        top: 20%;
+        width: 100%;
+        left: 10%;
+        text-align: left;
+        .title {
+          font-size: 2rem;
+          margin-bottom: 0.5rem;
+        }
+        .content {
+          font-size: 1rem;
+          color: grey;
+        }
+        .explore {
+          background-color: #feeeb0;
+          border-radius: unset;
+          border-color: black;
+          border: 1px solid;
+          padding: 1rem 2rem;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1440px) {
+    .premium-banner {
+      .premium-banner-images-content {
+        .wrap-box {
+          width: 70%;
+          left: 15%;
+        }
+      }
+    }
+    .wrap-content-special-price {
+      width: 70%;
+    }
+    .wrap-content-orther{
+      width: 80%;
+    }
+  }
+

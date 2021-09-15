@@ -1,0 +1,453 @@
+body{
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+h1{
+    margin: 0;
+}
+
+.sellerIntro, .premium {
+    width: 100%;
+    padding-top: 8.8rem;
+    .startSelling{
+        background-image: url("/static/images/imexFood/sellerIntro/seller-intro-banner1.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 0% center;
+        height: 21rem;
+        position: relative;
+        .sellingContent{
+            position: absolute;
+            top: 15%;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 0;
+            width: 100%;
+            max-height: 15rem;
+            h1{
+                font-size: 3rem;
+                margin: 0;
+                font-weight: bold;
+            }
+            p{
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            .openShopBtn{
+                background-color: white;
+                padding: 0.5rem 2rem;
+                font-size: 1.5rem;
+                color: #323433;
+                font-weight: bold;
+                display: inline-block;
+                &:hover{
+                    background-color: #f2f3f5;
+                }
+            }
+        }
+    }
+
+    .joinSeller{
+        text-align: center;
+        margin: 60px 0;
+        h1{
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        p{
+            font-size: 1rem;
+            margin-bottom: 3.5rem;
+            height: 2rem;
+            color: #666666;
+        }
+        .sellerServices{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            .servicesContent{
+                .servicesImage{
+                    background-color: #F4F4F4;
+                    border-radius: 50%;
+                    width: 7.1rem;
+                    height: 7.1rem;
+                    margin: 0;
+                    margin-bottom: 1.875rem;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    margin-left: auto;
+                    margin-right: auto;
+                    img{
+                        width: 3.5rem;
+                        height: 7.1rem;
+                        filter: invert(0.45);
+                    }
+                }
+                p{
+                    width: 8rem;
+                    font-size: 1rem;
+                    line-height: 1.5;
+                }
+            }
+        }
+        .openShopNow{
+            margin-top: 2rem;
+            a{
+                padding: 0.5rem 1.5rem;
+                font-size: 1.5rem;
+                color: white;
+                background: linear-gradient(to right, #FA6C3E, #F1912D);
+                display: inline-block;
+            }
+        }
+    }
+
+    .whereToSell{
+        background-image: url("/static/images/imexFood/sellerIntro/seller-intro-banner2.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 80% center;
+        height: 35.7rem;
+        position: relative;
+        min-height: 25rem;
+        .whereToSellIntro{
+            position: absolute;
+            top: 25%;
+            left: 10%;
+            margin-right: 10%;
+            max-width: 28.5rem;
+            h1{
+                margin-bottom: 1.4rem;
+                font-weight: bold;
+                font-size: 2rem;
+                text-transform: uppercase;
+            }
+            p{
+                text-align: justify;;
+                color: #666666;
+                margin-bottom: 1.5rem;
+            }
+        }
+    }
+
+    .toolsIntro{
+        .toolsIntroContent{
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 50rem;
+            padding: 3.2rem 0;
+
+            h1{
+                font-size: 2rem;
+                font-weight: bold;
+                margin-bottom: 2.1rem;
+            }
+            p{
+                color: #666666;
+            }
+        }
+    }
+
+    .toolsInfor{
+        margin: 0 auto;
+        .toolsInforContent{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            
+            .toolsInforItem{
+                display: flex;
+                align-items: center;
+                width: 50%;
+                justify-content: space-around;
+                margin: 2rem 0;
+                flex-wrap: wrap;
+                    .inforItem{
+                        max-width: 25rem;
+                        margin: 1rem 0;
+                        h1{
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        }
+                        p{
+                            
+                        }
+                }
+                
+            }
+        }
+    }
+    
+    .sellerStories{
+        background-color: #F8F8F8;
+        .sellerStoriesInfor{
+                .StoriesInforContent{
+                    text-align: center;
+                    margin-left: auto;
+                    margin-right: auto;
+                    max-width: 50rem;
+                    padding: 2.85rem 0;
+
+                h1{
+                font-size: 2rem;
+                font-weight: bold;
+                margin-bottom: 2.1rem;
+                }
+                p{
+                color: #666666;
+                }
+            }
+        }
+
+        .sellerStory{
+            display: flex;
+            justify-content: space-around;
+            width: 85%;
+            margin-left: auto;
+            margin-right: auto;
+            align-items: center;
+            padding-bottom: 3.5rem;
+            flex-wrap: wrap;
+            .sellerStoryImage{
+                    width: 14.2rem;
+                    height: 14.2rem;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin: 2rem 0;
+                
+            }
+
+            .sellerStoryContent{
+                display: flex;
+                justify-content: space-between;
+                
+                .sellerStoryQuote{
+                    width: 3.5rem;
+                    height: 3.5rem;
+                    filter: invert(0.8);
+                    margin-right: 30px;
+
+                }
+                .sellerStoryItem{
+                    max-width: 50rem;
+                    a {
+                        text-decoration: underline;
+                        color: #000;
+                    }
+                }
+            }
+        }
+    }
+
+    .sellerSupport{
+        text-align: center;
+        margin: 2.1rem 0;
+        margin: 0 auto;
+        h1{
+            font-weight: bold;
+        }
+        p{
+            padding-top: 1rem;
+        }
+        .sellerSupportContent{
+            display: flex;
+            margin: 0 auto;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+                .sellerSupportItem{
+                    width: 17.8rem;
+                    margin: 1.5rem 0;
+                    .SupportItemImage{
+                        background-color: #F4F4F4;
+                        border-radius: 50%;
+                        width: 7.1rem;
+                        height: 7.1rem;
+                        margin: 0;
+                        margin-bottom: 1.875rem;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                    h1{
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        margin-bottom: 1rem;
+                    }
+                    p{
+                        font-size: 1rem;
+                        line-height: 1.5;
+                }
+            }  
+        }
+    }
+}
+
+
+
+@media only screen and (max-width: $breakpoint-lg){
+    .sellerIntro{
+        .toolsIntro{
+            
+            .toolsIntroContent{
+                max-width: 40rem;
+            }  
+        }
+
+         .toolsInfor{
+            .toolsInforContent{
+                align-items: flex-start;
+                
+                .toolsInforItem{
+                    justify-content: space-between;
+                    flex-direction: column;
+                    width: 50%;
+                    
+                    
+                    .toolsInforIcon{
+                        
+
+                        
+                    }
+                    .inforItem{
+                        text-align: center;
+
+                    }
+                }
+            }
+        }
+        .joinSeller{
+            .sellerServices{
+                .servicesContent{
+                    width: 50%;
+                    margin: 0 auto;
+                    p{
+                        width: auto;
+                    }
+                }
+            }
+        }
+    }      
+}
+
+@media only screen and (max-width: $breakpoint-md){
+    .sellerIntro{
+        .startSelling{
+            .sellingContent{
+                top: 25%;
+                h1{
+                    font-size: 2rem;
+                    margin: 0;
+                    font-weight: bold;
+                }
+                p{
+                    font-size: 1rem;
+                    margin-bottom: 1.5rem;
+                }
+                .openShopBtn{
+                    font-size: 1rem;
+                }
+            }
+        }   
+        .joinSeller{
+            .sellerServices{
+                .servicesContent{
+                    width: 100%;
+                        p{
+                            width: auto;
+                        }
+                    }  
+                }
+            .openShopNow{
+                a{
+                    font-size: 1rem;
+                }
+            }
+        }
+        .toolsIntro{
+            .toolsIntroContent{
+                max-width: 30rem;
+            }
+        }
+        .toolsInfor{
+            .toolsInforContent{
+                
+                .toolsInforItem{
+                    justify-content: space-around;
+                    width: 100%;
+                    padding: 0;
+                }
+            }
+        }
+        .sellerStories{
+          .sellerStoriesInfor{
+                .StoriesInforContent{
+                    max-width: 30rem;
+                }
+            }
+        }
+
+        .sellerSupport{
+            .sellerSupportContent{
+                .sellerSupportItem{
+                    width:100%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 553px){
+    h1{
+        font-size: 2rem;
+    }
+    .sellerIntro{
+        .whereToSell{
+            .whereToSellIntro{
+                h1{
+                    margin-bottom: 1.4rem;
+                    font-weight: bold;
+                }
+                p{
+                    text-align: justify;;
+                    color: black;
+                    margin-bottom: 1.5rem;  
+                }
+            }
+        }
+
+        .toolsIntro{
+            .toolsIntroContent{
+                max-width: 30rem;
+            }
+        }
+
+        .toolsInfor{
+            .toolsInforContent{
+                    
+                .toolsInforItem{
+                    justify-content: space-around;
+                    width: 100%;
+                    padding: 0;
+                    text-align: center;
+                }
+            }
+        }
+
+
+        
+    }
+    
+}

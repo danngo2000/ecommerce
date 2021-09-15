@@ -1,0 +1,274 @@
+.footer {
+  border-top: 1px solid #e2e5f1;
+  @media only screen and (max-width: 719px) {
+    border: none;
+  }
+  &.categories {
+    padding-top: unset;
+    @media screen and (max-width: 498px) {
+      display: none;
+    }
+  }
+  .footerHeader {
+    display: none;
+  }
+  .email-antd-input {
+    margin-top: 1rem;
+    display: flex;
+    input.ant-input {
+      font-size: 13px;
+      color: #999;
+      border: none;
+      border-radius: 2.9px;
+      background-color: #f7f8fa;
+      height: 37.5px;
+    }
+    .subscribeBtn {
+      height: 38px;
+      font-size: 12px;
+      line-height: 13px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      text-transform: uppercase;
+    }
+    span.ant-input-group-addon {
+      padding: 11px 0;
+      padding-top: 12px;
+      display: unset;
+      button.ant-btn {
+        height: 40px;
+        border: none;
+        width: 100%;
+        margin-top: 1rem;
+        background-color: #999999 !important;
+        color: white !important;
+        opacity: 0.6;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: capitalize;
+        border-radius: unset;
+      }
+    }
+  }
+  .footer-container {
+    border-bottom: 1px solid #eeeeee;
+    @media only screen and (max-width: 719px) {
+      border: none;
+    }
+  }
+  .footer-links-container {
+    display: flex;
+    flex-flow: row wrap;
+    & > div {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #555;
+      text-transform: uppercase;
+    }
+    .bp3-button-text {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .footer-column,
+    .footer-column .bp3-collapse-body {
+      display: flex;
+      flex-flow: column nowrap;
+      flex-grow: 2;
+      &:last-child {
+        flex-grow: 0;
+      }
+      a {
+        margin-top: 0.8rem;
+        color: #999;
+        &:hover {
+          text-decoration: underline;
+          color: #333;
+        }
+      }
+      .textContent {
+        color: #adadad;
+        font-size: 12px;
+      }
+      #emailError {
+        color: red;
+      }
+    }
+    .bp3-collapse-body {
+      padding-left: 5%;
+    }
+    .accordionButton {
+      padding: 0.5rem 0;
+      width: 100%;
+      &:hover {
+        background: transparent;
+      }
+      .bp3-icon {
+        svg {
+          fill: #a1a1a1;
+          height: 22px;
+          width: 22px;
+        }
+      }
+      .bp3-icon:before {
+        display: none;
+      }
+    }
+    .footer-column-payments {
+      ul {
+        max-width: 275px;
+      }
+    }
+    .footer-column-socials {
+      .footer-column-social-links {
+        display: flex;
+        margin-top: 20px;
+        flex-flow: row nowrap;
+        align-items: center;
+        a {
+          margin-right: 2rem;
+        }
+      }
+    }
+    .footer-app-downloads {
+      .app-downloads-content {
+        display: flex;
+        margin-top: 5px;
+        @media only screen and (max-width: 719px) {
+          margin-top: 20px;
+        }
+        .QR-code {
+          img {
+            border: 0.0625rem solid rgba(0, 0, 0, 0.09);
+            height: 86px;
+            width: 86px;
+            max-height: none;
+            max-width: none;
+            border-radius: 0;
+          }
+        }
+        .contact-app {
+          display: flex;
+          margin-left: 10px;
+          flex-flow: column;
+          justify-content: space-around;
+          img {
+            width: 80px;
+            max-width: none;
+          }
+        }
+      }
+    }
+    .collapse-footer {
+      background: transparent;
+      .ant-collapse-header {
+        text-transform: uppercase;
+      }
+      .ant-collapse-content-box {
+        display: flex;
+        flex-flow: column nowrap;
+        margin-top: -0.5rem;
+        .menu {
+          color: #666;
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+    img {
+      min-width: 2rem;
+      max-height: 2rem;
+      object-fit: cover;
+      border-radius: 10%;
+      &[alt='youtube'] {
+        min-width: 2.5rem;
+        margin-top: -0.25rem;
+      }
+    }
+    & > div {
+      &:nth-child(n + 1):nth-child(-n + 4) {
+        flex: 1 1 18%;
+      }
+      &:last-child {
+        flex-grow: 0.5 !important;
+      }
+      &:nth-child(5) {
+        flex: 1 1 28%;
+      }
+      &:nth-child(6) {
+        flex: 0 0 40%;
+      }
+      &:nth-child(7) {
+        flex: 0 0 20%;
+      }
+    }
+
+    .footer-column-govCerts {
+      text-align: right;
+      img {
+        max-height: unset;
+        max-width: unset;
+        float: left;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 996px) {
+    .footer-links-container {
+      padding: 0 4%;
+      justify-content: space-between;
+      .footer-column-subscribe {
+        order: -1;
+      }
+      & > div {
+        margin-top: 1.5rem;
+        &:nth-child(n + 1):nth-child(-n + 5) {
+          flex: 1 1 100%;
+        }
+        &:nth-child(6) {
+          flex: 0 1 40%;
+        }
+        &:nth-child(7) {
+          flex: 0 1 40%;
+        }
+      }
+    }
+    .creditCardIcons li {
+      margin-right: 10px;
+    }
+  }
+
+  @media only screen and (max-width: 498px) {
+    .footer-links-container {
+      padding: 0 2%;
+      img {
+        max-width: 1.5rem;
+      }
+      img[alt='youtube'] {
+        max-width: 2rem;
+      }
+    }
+    .creditCardIcons img {
+      width: 32px;
+    }
+  }
+  .footer-links-container {
+    & > div {
+      &:first-child {
+        flex: 1 1 12%;
+      }
+      &:nth-child(2) {
+        flex: 1 1 22%;
+        @media only screen and (max-width: 498px) {
+          flex: 1 1 100%;
+        }
+      }
+    }
+    .footer-column-subscribe {
+      flex: 1 1 22%;
+    }
+  }
+}

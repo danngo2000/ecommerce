@@ -1,0 +1,149 @@
+@mixin box-shadow($shadow...) {
+    -webkit-box-shadow: $shadow; /* iOS <4.3 & Android <4.1 */
+       -moz-box-shadow: $shadow;
+            box-shadow: $shadow;
+}
+
+@mixin animation($animation...) {
+    -o-animation: $animation;
+    -moz-animation: $animation;
+    -webkit-animation: $animation;
+    animation: $animation;
+}
+
+@mixin animation-fill-mode($mode){
+    -webkit-animation-fill-mode: $mode;
+    -moz-animation-fill-mode: $mode;
+    -ms-animation-fill-mode: $mode;
+    -o-animation-fill-mode: $mode;
+    animation-fill-mode: $mode;
+}
+
+@mixin animation-duration($time){
+    -webkit-animation-duration: $time;
+    -moz-animation-duration: $time;
+    -ms-animation-duration: $time;
+    -o-animation-duration: $time;
+    animation-duration: $time;
+}
+
+@mixin animation-name($name) {
+    -webkit-animation-name: $name;
+    -moz-animation-name: $name;
+    -o-animation-name: $name;
+    animation-name: $name;
+}
+
+@mixin translate($x, $y) {
+    -webkit-transform: translate($x, $y);
+        -ms-transform: translate($x, $y); /* IE9 only */
+         -o-transform: translate($x, $y);
+            transform: translate($x, $y);
+}
+
+
+@mixin transform($transform) {
+    -webkit-transform: $transform;
+        -ms-transform: $transform; /* IE9 only */
+         -o-transform: $transform;
+            transform: $transform;
+}
+
+@mixin transition($transition...) {
+    -webkit-transition: $transition;
+        -ms-transition: $transition;
+         -o-transition: $transition;
+            transition: $transition;
+}
+
+@mixin rotate($degrees) {
+    -webkit-transform: rotate($degrees);
+        -ms-transform: rotate($degrees);/* IE9 only */
+         -o-transform: rotate($degrees);
+            transform: rotate($degrees);
+}
+
+@mixin rotateY($degrees) {
+    -webkit-transform: rotateY($degrees);
+        -ms-transform: rotateY($degrees); /* IE9 only */
+         -o-transform: rotateY($degrees);
+            transform: rotateY($degrees);
+}
+
+@mixin scale($scale) {
+    -webkit-transform: scale($scale);
+        -ms-transform: scale($scale); /* IE9 only */
+         -o-transform: scale($scale);
+            transform: scale($scale);
+}
+
+@mixin transform-origin($origin) {
+    -webkit-transform-origin: $origin;
+       -moz-transform-origin: $origin;
+        -ms-transform-origin: $origin; /* IE9 only */
+            transform-origin: $origin;
+}
+
+@mixin transform-style($style) {
+    -webkit-transform-style: $style;
+       -moz-transform-style: $style;
+        -ms-transform-style: $style; /* IE9 only */
+            transform-style: $style;
+}
+
+@mixin will-change($value...) {
+    -webkit-will-change: $value;
+       -moz-will-change: $value;
+        -ms-will-change: $value; /* IE9 only */
+         -o-will-change: $value;
+            will-change: $value;
+}
+
+@mixin perspective($value) {
+    -webkit-perspective: $value;
+        -ms-perspective: $value; /* IE9 only */
+         -o-perspective: $value;
+            perspective: $value;
+}
+
+@mixin opacity($value) {
+    filter: alpha(opactiy=($value * 100));
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opactiy=#{$value * 100})";
+    /* Netscape */
+    -moz-opacity: $value;
+    /* Safari 1.x */
+    -khtml-opacity: $value;
+    /* Good browsers */
+    opacity: $value;
+}
+
+@mixin filter($filter-type,$filter-amount) {
+    -webkit-filter: $filter-type+unquote('(#{$filter-amount})');
+    -moz-filter: $filter-type+unquote('(#{$filter-amount})');
+    -ms-filter: $filter-type+unquote('(#{$filter-amount})');
+    -o-filter: $filter-type+unquote('(#{$filter-amount})');
+    filter: $filter-type+unquote('(#{$filter-amount})');
+}
+
+@mixin hw_accelerate {
+    -webkit-transform: translateZ(0) translate3D(0,0,0);
+    -moz-transform: translateZ(0) translate3D(0,0,0);
+    -o-transform: translateZ(0) translate3D(0,0,0);
+    -ms-transform: translateZ(0) translate3D(0,0,0);
+    transform: translateZ(0) translate3D(0,0,0);
+}
+
+/* @mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+} */

@@ -1,0 +1,24 @@
+.green-theme {
+  .header-wrap-content-res {
+    .flex-box {
+      .logo {
+        img {
+          width: 5rem !important;
+        }
+      }
+    }
+  }
+  .header {
+    .headerWrap {
+      .logoWrap {
+        width: 13rem;
+        .logo-size {
+          max-width: 12rem;
+          @media only screen and (max-width: 719px) {
+            width: 6rem !important;
+          }
+        }
+      }
+    }
+  }
+}

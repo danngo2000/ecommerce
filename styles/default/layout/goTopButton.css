@@ -1,0 +1,26 @@
+#goTopButton {
+  display: inline-block;
+  position: fixed;
+  bottom: 65px;
+  right: 40px;
+  transition: opacity 0.5s, visibility 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+  z-index: 1000;
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    display: initial;
+  }
+
+  &.changePosition {
+    bottom: 95px;
+
+    &.detailPage{
+      bottom: 130px;
+    }
+  }
+}
+

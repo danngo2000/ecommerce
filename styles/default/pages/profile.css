@@ -1,0 +1,219 @@
+.myAccount {
+  .myAccountPage{
+    .isLoading {
+      .ant-tabs-bar{
+        display: none;
+      }
+    }
+    .column02{
+      .myAccountContent{
+        .contentBox{
+          .reviewForm{
+            .writeReviewForm{
+              .review-address{
+                display: none;
+              }
+            }
+          }
+        }
+      }
+      .myReviews{
+        .ContentMyReview{
+          @media screen and(min-width:720px){
+            margin-top:15px;
+          }
+          @include mediaquery-sm(){
+            background: white;
+          }
+          padding: unset;
+          .ant-tabs .ant-tabs-bar{ background: #ffff; }
+          .ant-tabs-tab{ 
+            padding: 15px 0;
+          }
+          .ant-tabs-nav{ margin-left: 20px; }
+          .ant-tabs-ink-bar{ 
+            height: 5px;
+            background-color: #ee4d2d;
+          }
+          .ant-tabs-tab:hover {
+            color: #ee4d2d;
+          }
+          .ant-tabs-tab-active {
+            color: #ee4d2d;
+          }
+        }
+      }
+      .orderList {
+        padding: 0;
+        background: unset;
+        .boxHeader{
+          padding: 10px 20px;
+          .row-Title{
+            border-bottom: 1px solid #dedede;
+            padding-bottom: 5px;
+            justify-content: space-between;
+            .col-md-4{
+              text-align: end;
+              padding-right: 1rem;
+              text-transform: capitalize;
+              color: #ee4d2d;
+            }
+          }
+          @include mediaquery-sm {
+            padding: unset;
+            .row-Title {
+              border-bottom: none;
+            }
+          }
+        }
+        .contentBody{
+          padding: 0;
+          background: #fff;
+          opacity: 1;
+          z-index: 11;
+          .orders-product{
+            padding: 10px 0;
+            .order-content{
+              .product-price{
+                display: block;
+                @include mediaquery-sm {
+                  color: #ee4d2d;
+                }
+              }
+              .col-left{
+                @media only screen and(min-width:720px){
+                  max-width: 70%;
+                }
+                .product-name{
+                  color: #343434;
+                }
+              }
+              .oderBox {
+                text-align: end;
+                .product-qty {
+                  color: #A4A4A4;
+                }
+                @include mediaquery-sm {
+                  text-align: start;
+                }
+              }
+              .left-orderDetail{
+                .name-Detail{
+                  max-width: 70%;
+                }
+              }
+            }
+          }
+          .content-cover{
+            max-width: 95%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-top: 1px solid #dedede;
+            &:first-child{
+              border: none;
+            }
+            @include mediaquery-sm {
+              max-width: 100%;
+            }
+          }
+          .footer{
+            padding: 10px 20px 0 10px;
+            border-top: 1px solid #dedede;
+          }
+        }
+      }
+      .orderWrapper{
+        padding: 0;
+        background:unset;
+      }
+
+    .refund-title{
+      margin-bottom: 10px;
+    }
+    .refund-content{
+      padding: 0;
+      .empty-icon{
+        .anticon-undo{
+          font-size: 100px;
+          color: red;
+        }
+      }
+    }
+    .contentBox{
+      .contentMyrefund{
+        padding: 10px;
+        .ant-row{
+          width: 100%;
+          .ant-col{
+            padding: 2px 0;
+          }
+        }
+        .images-return{
+          margin: 0 5px;
+          img{
+            width: 70%;
+            @include mediaquery-sm {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+    }
+    .skeleton{
+      position: absolute;
+      width: 100%;
+      padding-left: 20px;
+      .ant-skeleton-paragraph{
+        li{
+          width: 100% !important;
+          &:last-child { width: 61% !important}
+        }
+      }
+    }
+    .orderPage{
+      .ant-tabs{
+        .ant-tabs-content{
+          position: relative;
+        
+        }
+      }
+      @media screen and (min-width:720px){
+        margin-top:15px;
+      }
+    }
+    .orderPage .ant-tabs{
+      .ant-tabs-nav-wrap{
+        .ant-tabs-nav{
+          width: 100%;
+          div{
+            display: flex;
+            flex-direction: row;
+          }
+          .ant-tabs-tab{
+            margin: 0;
+            flex: calc(100%/7);
+            justify-content: center;
+            @media only screen and(max-width:996px){
+              margin: 0 32px 0 0;
+            }
+          }
+          .ant-tabs-ink-bar{
+            height: 5px;
+            @include mediaquery-sm {
+              height: 2px;
+            }  
+          }
+        }
+      }
+    }
+    .orderDetailPage .ant-steps{
+      padding: 1px;
+      .ant-steps-item-description{
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.65); ;
+      }
+    }
+  }
+}
