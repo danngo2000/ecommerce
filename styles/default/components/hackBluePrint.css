@@ -1,0 +1,26 @@
+.bp3-toast-container{
+    .bp3-icon{
+        display: none;
+    }
+}
+
+.bp3-tab-indicator-wrapper .bp3-tab-indicator {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #f3850d;
+    height: 3px;
+  }
+.bp3-tab[aria-selected="true"], .bp3-tab:not([aria-disabled="true"]):hover {
+    color: #f3850d;
+}
+.bp3-tab-list{
+    border-bottom: 2px #f1f1f1 solid;
+    
+}
+.bp3-tab-indicator-wrapper ~ .bp3-tab {
+    margin-right: 50px;
+    font-size: 16px;
+    line-height: 40px;
+}

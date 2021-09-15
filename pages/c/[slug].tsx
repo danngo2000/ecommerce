@@ -13,19 +13,17 @@ import qs from 'qs'
 const Category = ({ data, pageQuery }: any) => {
   const category = data ? data.category : null
   return (
-    <>
-    </>
-    // <ProductsSearchCommon
-    //   pageName='category'
-    //   query={pageQuery}
-    //   data={data}
-    //   title={category ? category?.name : ''}
-    //   category={category}
-    //   nextSeoConfig={{
-    //     title: category ? category?.name : '',
-    //     description: category ? category.description : ''
-    //   }}
-    // />
+    <ProductsSearchCommon
+      pageName='category'
+      query={pageQuery}
+      data={data}
+      title={category ? category?.name : ''}
+      category={category}
+      nextSeoConfig={{
+        title: category ? category?.name : '',
+        description: category ? category.description : ''
+      }}
+    />
   )
 }
 
