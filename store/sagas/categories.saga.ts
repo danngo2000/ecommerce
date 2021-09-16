@@ -12,7 +12,7 @@ function* fetchCategoriesSaga() {
   try {
     const data: CategoriesState = yield call(fetch)
     yield put(fetchCategoriesSuccess(data))
-  } catch (err) {
+  } catch (err:any) {
     console.log(err.message)
     // yield put(fetchCategoriesFailure(err))
   }

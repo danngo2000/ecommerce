@@ -1,5 +1,5 @@
 import React, { useEffect, useState, FC } from 'react'
-import Header from './TheHeader/index2'
+import Header from './TheHeader'
 import TopHeader from './TheHeader/ResponsiveHeader/TopHeader'
 import LoginDialog from './Customer/LoginDialog'
 import { useSelector } from 'react-redux'

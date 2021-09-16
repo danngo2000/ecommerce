@@ -1,5 +1,5 @@
 @mixin mediaquery-xs() {
-  @media only screen and (max-width: $breakpoint-sm - 1) {
+  @media only screen and (max-width: $breakpoint-sm) {
     @content;
   }
 }
@@ -11,7 +11,7 @@
 }
 
 @mixin mediaquery-md() {
-  @media only screen and (min-width: $breakpoint-md) and (max-width: $breakpoint-xl - 1) {
+  @media only screen and (min-width: $breakpoint-md) and (max-width: $breakpoint-xl) {
     @content;
   }
 }
@@ -29,7 +29,7 @@
 }
 
 @mixin mediaquery-not-lg() {
-  @media only screen and (max-width: $breakpoint-xl - 1) {
+  @media only screen and (max-width: $breakpoint-xl) {
     @content;
   }
 }

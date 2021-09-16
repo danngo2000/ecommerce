@@ -30,11 +30,14 @@ const ComponentRender = ({ item, data }) => {
     case 'slider':
       return <SuperHeroBanner {...item} />
     case 'products':
-      if (item.display === 'flex') {
-        return <FeaturedBoxFlex {...item} />
-      } else {
-        return <FeaturedBox {...item} />
-      }
+      return <FeaturedBox {...item} />
+    // case 'products':
+    //   if (item.display === 'flex') {
+    //     return <FeaturedBoxFlex {...item} />
+    //   }
+    //   else {
+    //     return <FeaturedBox {...item} />
+    //   }
     case 'lazy-load-products':
       return <LazyFeaturedBox {...item} />
     case 'feature-banner':
@@ -44,7 +47,7 @@ const ComponentRender = ({ item, data }) => {
     // case 'product-by-categories':
     //   if (item.data.display && item.data.display === 'flex') {
     //     return <ProductCategoriesFlex {...item} />
-    //   } 
+    //   }
     //   else {
     //     return <ProductCategories {...item} />
     //   }

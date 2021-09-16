@@ -15,15 +15,15 @@ import {
   googleLoginRequest,
   loginRequest, registerRequest,
   tokenRequest
-} from '../../api/auth';
+} from '../services/auth';
 // import {toggleCartLoading} from 'actions/ui'
 import Router from 'next/router';
 // import {publicKeysSelector} from 'store/config/config.selector'
 
 import { AuthState, AUTH_SIGHUP_REQUEST,
   loginRequestSuccess, logoutRequestSuccess,
-  AUTH_LOGOUT_REQUEST, AUTH_CHANGE_PASSWORD_REQUEST,
-  AUTH_LOGIN_REQUEST, AUTH_LOGIN_FAILED,
+  authLogoutRequest, AUTH_CHANGE_PASSWORD_REQUEST,
+  AUTH_LOGIN_REQUEST, AUTH_LOGIN_FAILED, loginFailure,
 } from 'actions/auth'
 
 const isServer = typeof window !== 'object'
@@ -42,15 +42,13 @@ const validateCaptcha = (action = 'login', publicKey?: string) => {
 }
 
 const saveToken = (token: string) => {
-  console.log('vo save token')
   window.localStorage.setItem('token', token)
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 }
 
 function* initialTokenValidate() {
   try {
-    console.log('vo init')
-    let token = localStorage.getItem('token')
+    let token = window.localStorage.getItem('token')
     if(token==null) token =''
     let tokenExpired = false
     let decodedTokenStorage:any = jwt.decode(token)
@@ -58,7 +56,7 @@ function* initialTokenValidate() {
     if (!token || token === 'undefined' || tokenExpired) {
       ({ token } = yield call(tokenRequest))
       if(token==null) token =''//add new
-      localStorage.setItem('token', token)
+      window.localStorage.setItem('token', token)
     }
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
     let decodedToken: any= jwt.decode(token)
@@ -70,7 +68,7 @@ function* initialTokenValidate() {
     return isGuest
   } catch (e) {
     const { token } = yield call(tokenRequest)
-    localStorage.setItem('token', token)
+    window.localStorage.setItem('token', token)
     console.error(e)
     return null
   }
@@ -78,7 +76,6 @@ function* initialTokenValidate() {
 
 function* login(payload: LoginPayload | GoogleLoginPayload | FacebookLoginPayload, originalToken:any) {
   let data: LoginResponseData
-  console.log('vo login')
   try {
     const refCode = window.localStorage.getItem('refCode')
     if ((<GoogleLoginPayload>payload).googleToken) {
@@ -87,21 +84,20 @@ function* login(payload: LoginPayload | GoogleLoginPayload | FacebookLoginPayloa
       data = yield call(facebookLoginRequest, (<FacebookLoginPayload>payload), originalToken)
     } else {
       const { password, email } = payload as LoginPayload
-    //   const { recaptcha: recaptchaKey } = yield select(publicKeysSelector)
-      // const recaptchaToken = null // yield call(validateCaptcha, 'login', recaptchaKey)
       data = yield call(loginRequest, email, password,  originalToken)
     }
     const { token, customer, cart } = data
     yield call(saveToken, token)
     yield put(loginRequestSuccess(token, customer, cart))
     window.localStorage.removeItem('refCode')
-  } catch (error) {
+  } catch (error:any) {
     console.error(error.message)
-    yield put({type: AUTH_LOGIN_FAILED, error: error.message || error.data })
+    // yield put({type: AUTH_LOGIN_FAILED, error: error.message || error.data })
+    yield put(loginFailure())
   } finally {
-    // if (yield cancelled()) {
-    //   yield put({type: AUTH_LOGIN_CANCELED})
-    // }
+    if (yield cancelled()) {
+      yield put(loginFailure())
+    }
   }
 }
 
@@ -111,15 +107,15 @@ function* changePassword(action:any) {
     const { token, customer } = yield call(changePasswordRequest, action.payload)
     yield call(saveToken, token)
     yield put(loginRequestSuccess(token, customer))
-    // yield call(Router.push, '/')
-  } catch (e) {
+    yield call(Router.push, '/')
+  } catch (e:any) {
     console.error(e.message)
   }
 }
 
 function* logout() {
   const { token } = yield call(tokenRequest)
-  localStorage.setItem('token', token)
+  window.localStorage.setItem('token', token)
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
   yield put(logoutRequestSuccess(token))
   yield call(Router.push, '/')
@@ -162,9 +158,8 @@ export default function* authSaga() {
   }
 
   while (!isServer) {
-    console.log('while',!isServer)
     if (!isGuest) {
-      yield take(`${AUTH_LOGOUT_REQUEST}`)
+      yield take(`${authLogoutRequest}`)
       yield call(logout)
     }
     let action: {type:any,payload:any} = yield take([
@@ -180,13 +175,13 @@ export default function* authSaga() {
     else if (action.type === AUTH_CHANGE_PASSWORD_REQUEST) task = yield fork(changePassword, action)
 
     action = yield take([
-      `${AUTH_LOGOUT_REQUEST}`,
+      `${authLogoutRequest}`,
       AUTH_SIGHUP_REQUEST,
       AUTH_LOGIN_FAILED
     ])
 
     switch (action.type) {
-      case `${AUTH_LOGOUT_REQUEST}`:
+      case `${authLogoutRequest}`:
         yield cancel(task)
         yield call(logout)
         break

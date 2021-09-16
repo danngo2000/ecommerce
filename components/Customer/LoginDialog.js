@@ -1,12 +1,11 @@
 import React from 'react'
 import { Input, Modal } from 'antd'
 import Link from 'next/link'
-// import { t, T } from 'locales'
 import { connect } from 'react-redux'
 import ExternalLogin from '../ExternalLogin'
 // import RegisterForm from './RegisterForm'
-import { toggleLoginDialog } from 'actions/ui'
-import { loginRequest } from 'actions/auth'
+import { toggleLoginDialog, isLoginDialogOpen } from '../../actions/ui'
+import { loginRequest } from '../../actions/auth'
 
 class LoginDialog extends React.Component {
   constructor(props) {
@@ -30,6 +29,7 @@ class LoginDialog extends React.Component {
     this.setState({ form: { ...form }, message: '' })
   }
 
+  
   handleClose = () => {
     this.props.toggleLoginDialog(false)
   }
@@ -92,6 +92,7 @@ class LoginDialog extends React.Component {
       isLogin
     } = this.state
     const { isLoginDialogOpen, toggleLoginDialog } = this.props
+
     const theme = this.props.config['site/theme']
     return (
       <div>
@@ -216,7 +217,7 @@ class LoginDialog extends React.Component {
 
 const mapState = (state) => ({
   config: state.config
-  //   isLoginDialogOpen: state.ui.isLoginDialogOpen
+    // isLoginDialogOpen: state.ui.isLoginDialogOpen
 })
 
 export default connect(mapState, { toggleLoginDialog, loginRequest })(

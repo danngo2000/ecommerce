@@ -100,7 +100,7 @@ const FeaturedBox = React.memo((props) => {
             ''
           )}
           <div className='content'>
-            <ProductSlider products={props.products} showAddToCartButton={quickMode} />
+            {/* <ProductSlider products={props.products} showAddToCartButton={quickMode} /> */}
           </div>
         </article>
       </div>

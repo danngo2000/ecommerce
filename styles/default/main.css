@@ -24,7 +24,7 @@
 
 @import 'partials/pagination';
 
-/* @import 'pages/customer'; */
+@import 'pages/customer';
 @import 'pages/order';
 @import 'pages/landing';
 /* @import 'pages/blog'; */

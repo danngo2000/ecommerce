@@ -46,6 +46,7 @@
     }
   }
 }
+
 .mainLayout {
   @include mediaquery-sm {
     overflow: hidden;
@@ -56,12 +57,14 @@
 .container {
   padding: 0;
 }
+
 .signIn-layout {
   background-color: whitesmoke;
   @include mediaquery-sm() {
     background-color: white;
   }
 }
+
 .recipe-layout {
   background-color: #fff;
   .footer {
@@ -81,6 +84,7 @@
     }
   }
 }
+
 .signIn-reponsive-layout {
   @include mediaquery-sm {
     height: 100vh;
@@ -613,6 +617,7 @@
     }
   }
 }
+
 .checkout {
   @include mediaquery-max($breakpoint-md) {
     padding-top: 0;
@@ -645,6 +650,7 @@
     }
   }
 }
+
 .cart-sumary {
   transition: opacity 0.3s ease-out 0s !important;
   .ant-drawer-content-wrapper {
@@ -717,10 +723,9 @@
         }
       }
     }
-    .ant-drawer-footer {
-    }
   }
 }
+
 .cart-side-bar-footer {
   .goto-wrapper {
     .view-cart {
@@ -1118,7 +1123,6 @@
     }
   }
 }
-
 .static-content-page {
   @include mediaquery-max($breakpoint-md) {
     padding-top: 0;
@@ -1155,6 +1159,7 @@
     }
   }
 }
+
 .categories {
   .categories-category {
     padding-top: 0px;
@@ -1184,6 +1189,7 @@
     }
   }
 }
+
 .cartPage {
   margin-top: -14px;
   @include mediaquery-max($breakpoint-md) {
@@ -1202,6 +1208,7 @@
     }
   }
 }
+
 .loginPage {
   @include mediaquery-sm() {
     padding: 0 !important;
@@ -1219,6 +1226,7 @@
     }
   }
 }
+
 .myAccount {
   @include mediaquery-sm() {
     padding: 0 !important;
@@ -1236,6 +1244,7 @@
     background-color: white;
   }
 }
+
 .responsive {
   @include mediaquery-sm() {
     margin-top: 1rem;
@@ -1264,6 +1273,7 @@
     }
   }
 }
+
 .res-register {
   @include mediaquery-sm() {
     display: flex;
@@ -1474,7 +1484,7 @@
     span {
       flex: 50%;
       text-align: right;
-      font-size: $font-size-base;
+      font-size: 14px;
     }
     .totalItems {
       margin-bottom: 10px;
@@ -1492,6 +1502,7 @@
       }
     }
   }
+
   table {
     width: 100%;
     thead {
@@ -1509,6 +1520,7 @@
       }
     }
   }
+
   .contentBox {
     margin-bottom: 15px;
     border: none;
@@ -1556,7 +1568,7 @@
         bottom: 0;
         padding-right: 1rem;
         text-decoration: underline;
-        @include mediaquery-sm {
+        @media only screen and (max-width: 719px) {
           padding-right: 4.5rem;
         }
       }
@@ -1575,7 +1587,7 @@
         max-width: 50%;
       }
       .orderItemList .order-content {
-        @include mediaquery-xs {
+        @media only screen and (max-width: 498px) {
           .left-orderDetail {
             max-width: unset;
           }
@@ -1583,7 +1595,6 @@
       }
     }
   }
-
   .contentHeader {
     background: #fff;
     padding: 1rem 1.5rem;
@@ -1667,6 +1678,7 @@
     margin: 0 0 10px 0 !important;
   }
 }
+
 .orderList {
   .contentBody {
     padding-top: 10px;
@@ -1745,11 +1757,13 @@
     }
   }
 }
+
 .delete-customer-product-modal {
   top: 30%;
   margin: 0 auto;
   transition: 0 all;
 }
+
 .orderList .contentBody,
 .contentBox .detail-content {
   .total-price {
@@ -1770,6 +1784,7 @@
     width: 100%;
   }
 }
+
 .myAccountPage,
 .myAccountMobilePage {
   padding-bottom: 100px;
@@ -2366,11 +2381,13 @@
 .DashboardPage.inactive {
   display: none;
 }
+
 .AddressDialog {
   .bp3-control.bp3-radio {
     display: inline;
   }
 }
+
 .blockCollapsibleNav {
   background: #fff;
   list-style: none;
@@ -2750,9 +2767,6 @@
             text-align: center;
           }
         }
-        .country,
-        .language {
-        }
         .warning {
           border: 1px solid red;
         }
@@ -3103,6 +3117,7 @@
     }
   }
 }
+
 .addressBookForm {
   .bp3-control.bp3-large {
     font-size: 14px;
@@ -3134,6 +3149,7 @@
     margin-bottom: 5px;
   }
 }
+
 .addressForm,
 .customer-product-form {
   .actionButtons {
@@ -3198,6 +3214,7 @@
     }
   }
 }
+
 .margin-top-0 {
   margin-top: 0px;
 }
@@ -3516,6 +3533,7 @@
       width: 100%;
     }
   }
+
   .wishList-content {
     .wishlistPage {
       padding: 27px 20px;
@@ -3665,7 +3683,6 @@
       content: '';
     }
   }
-
   .cart-item,
   .share-social,
   .add-wishlist-wrapper {
@@ -3818,6 +3835,7 @@
   .orderDetailPage {
     max-width: unset !important;
   }
+
   .orderDetailPage,
   .orderPage {
     background: #f3f3f3;

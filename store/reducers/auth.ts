@@ -5,8 +5,8 @@ import {
   PayloadActionCreator,
 } from "@reduxjs/toolkit";
 import produce from "immer";
-import { HYDRATE } from "next-redux-wrapper";
 import { SignUpPayload } from "../interfaces";
+
 
 export type AuthState = {
   isGuest: boolean;
@@ -43,21 +43,32 @@ export const authSlice = createSlice({
         return draft;
       });
     },
+    loginFailure: (state) => {
+      return produce(state, (draft) => {
+        return draft;
+      });
+    },
    
   },
-  //   extraReducers: (builder) => {
-  //     builder.addCase(HYDRATE,(state, action: any) => {
-  //         return produce(state, draft => Object.assign(draft, action.payload.auth))
-  //     })
+    // extraReducers: (builder) => {
+    //   builder.addCase(AuthActions.logoutSuccess,(state, action: any) => {
+    //     return produce(state, (draft) => {
+    //       draft.isGuest = true;
+    //       return draft;
+    //     });
+    //   })
 
-  //   }
+    // }
 });
 
+/** Just use for authsaga */
 export const AUTH_LOGIN_FAILED = "auth/LOGIN_FAILED";
 export const AUTH_LOGIN_REQUEST = "auth/LOGIN_REQUEST";
 export const AUTH_CHANGE_PASSWORD_REQUEST = "auth/CHANGE_PASSWORD_REQUEST";
 export const AUTH_SIGHUP_REQUEST = "auth/SIGHUP_REQUEST";
-export const AUTH_LOGOUT_REQUEST = createAction("auth/LOGOUT_REQUEST");
+/** ---------------------- */
+
+export const authLogoutRequest = createAction("auth/LOGOUT_REQUEST");
 export const loginRequest = createAction(
   "auth/LOGIN_REQUEST",
   (arg1: any, password?: any) => ({
@@ -75,5 +86,5 @@ export const registerRequest = createAction(
   (form: SignUpPayload) => ({ payload: form })
 );
 
-export const { loginRequestSuccess, logoutRequestSuccess } = authSlice.actions;
+export const { loginRequestSuccess, logoutRequestSuccess, loginFailure } = authSlice.actions;
 export const authReducer = authSlice.reducer;

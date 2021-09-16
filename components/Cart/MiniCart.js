@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { Tooltip } from 'antd'
 import {
   DeleteOutlined,
@@ -6,17 +6,16 @@ import {
   ClockCircleOutlined
 } from '@ant-design/icons'
 import Link from 'next/link'
-// import { Price } from 'Product/Price'
+import Price from '../Product/Price'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import FreeShipping from './FreeShipping'
-// import { t, T } from 'locales'
-// import NoticeStock from 'Product/Notice/Stock'
+import NoticeStock from '../Product/Notice/Stock'
 import axios from 'axios'
 import Router from 'next/router'
 import { makeOrderItemLink } from 'utils'
-import CartDrawer from '../Cart/CartDrawer'
+import CartDrawer from './CartDrawer'
 import CartNotifier from './CartNotifier'
-import { toggleCartDrawer, toggleLoginDialog } from 'actions/ui'
+import { toggleCartDrawer, toggleLoginDialog } from '../../actions/ui'
 // import { changeCartItemQuantity, removeFromCart, saveForLater, updateCart } from '../../actions/cart'
 // import { goToCheckout } from '../../actions/checkout'
 
@@ -40,9 +39,9 @@ const CartHeading = React.memo(() => {
       data: { cart }
     } = await axios.post('quotes/verify')
     if (cart) {
-      dispatch(updateCart(cart))
-      dispatch(toggleCartDrawer(false))
-      dispatch(goToCheckout())
+      // dispatch(updateCart(cart))
+      // dispatch(toggleCartDrawer(false))
+      // dispatch(goToCheckout())
     }
   }
   const isGuest = useSelector((state) => state.auth.isGuest)
@@ -56,7 +55,7 @@ const CartHeading = React.memo(() => {
           className='btn btn-gray checkout-btn'
           onClick={() => dispatch(toggleLoginDialog(true))}
         >
-          {t('Login')}
+          Login
         </a>
       ) : (
         <a
@@ -64,23 +63,23 @@ const CartHeading = React.memo(() => {
           className='btn btn-gray checkout-btn'
           intent='danger'
         >
-          {t('Checkout')}
+          Checkout
         </a>
       )}
     </div>
   )
 })
 
-const CartSubtotal = React.memo(function () {
+const CartSubtotal = React.memo((props) => {
   const cart = useSelector((state) => state.cart)
   return (
     <div className='grid-container-fluid grid-2 subtotal-wrapper'>
       <div className='text-left'>
-        <strong>{t('Grandtotal')}</strong> ({cart.items_count}{' '}
-        {cart.items_count > 1 ? t('items') : t('item')})
+        <strong>Grandtotal</strong> ({cart?.items_count}&nbsp;
+        {cart.items_count > 1 ? 'items' : 'item'})
       </div>
       <div className='subtotal-price-cart'>
-        <Price price={cart.grand_total} />
+        {/* <Price price={cart.grand_total} /> */}
       </div>
     </div>
   )
@@ -88,7 +87,7 @@ const CartSubtotal = React.memo(function () {
 
 const CartItem = React.memo((props) => {
   let { emptyThumbImg } = props
-  const { cartData } = useAppSelector((state) => state.cart);
+  const { cartData } = useAppSelector((state) => state.cart)
   const isGuest = useSelector((state) => state.auth.isGuest)
   const dispatch = useDispatch()
 
@@ -207,88 +206,92 @@ const EmptyCart = React.memo(function () {
       <div className='center'>
         <div className='CartEmptyPage'>
           <img src='/static/images/shopping-cart.svg' width='100px' />
-          <p className='EmptyTxt'>{t('Shopping Cart is Empty')}</p>
-          <p>{t('You have no items in your shopping cart')}.</p>
+          <p className='EmptyTxt'>Shopping Cart is Empty</p>
+          <p>You have no items in your shopping cart.</p>
         </div>
       </div>
     </div>
   )
 })
 
-class MiniCart extends Component {
-  state = {
-    visible: false
-  }
+const MiniCart = ({ icon, text }) => {
+  const [visible, setVisible] = useState(false)
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const config = useSelector((state) => state.config)
+  const cart = useSelector((state) => state.cart)
 
-  render() {
-    const { cart } = this.props
-    // const checkQty = cart.items.filter(i => !i.product || i.product.quantity <= 0)
-    const freeShippingLimit = this.props.config['cart/freeShippingLimit']
-    const theme = this.props.config['site/theme']
-    const cartOption = this.props.config['sales/cart/layout_option']
-    return (
-      <>
-        {cartOption === 'drawer' ? (
-          <div className='miniCartBox-drawer'>
-            <button className='drawer-cart-btn header-main'>
+  const checkQty = cart.items?.filter(
+    (i) => !i.product || i.product.quantity <= 0
+  )
+  const freeShippingLimit = config['cart/freeShippingLimit']
+  const theme = config['site/theme']
+  const cartOption = config['sales/cart/layout_option']
+
+  return (
+    <>
+      {cartOption === 'drawer' ? (
+        <div className='miniCartBox-drawer'>
+          <button className='drawer-cart-btn header-main'>
+            <span className='countNumber'>
+              {typeof cart !== 'undefined' && cart.items_count > 0 && (
+                <span className='drawer-cart-number'>{cart.items_count}</span>
+              )}
+            </span>
+            <ShoppingCartOutlined
+              type={icon}
+              style={{ fontSize: '25px' }}
+              onClick={() => setIsDrawerOpen(true)}
+            />
+          </button>
+          <CartDrawer
+            isDrawerOpen={isDrawerOpen}
+            onClose={() => setIsDrawerOpen(false)}
+          />
+          <CartNotifier />
+        </div>
+      ) : (
+        <div
+          className={
+            theme === 'yellow-theme'
+              ? 'miniCartBox header-main miniCartImex'
+              : 'miniCartBox header-main'
+          }
+        >
+          <Link href='/cart'>
+            <a>
               <span className='countNumber'>
-                {typeof cartData !== 'undefined' && cartData.items_count > 0 && (
-                  <span className='drawer-cart-number'>{cartData.items_count}</span>
-                )}
-              </span>
-              <ShoppingCartOutlined
-                type={this.props.icon}
-                style={{ fontSize: '25px' }}
-              />
-            </button>
-            <CartDrawer />
-            <CartNotifier />
-          </div>
-        ) : (
-          <div
-            className={
-              theme === 'yellow-theme'
-                ? 'miniCartBox header-main miniCartImex'
-                : 'miniCartBox header-main'
-            }
-          >
-            <Link href='/cart'>
-              <a>
-                <span className='countNumber'>
-                  {typeof cartData !== 'undefined' && cartData.items_count > 0 && (
+                {typeof cartData !== 'undefined' &&
+                  cartData.items_count > 0 && (
                     <span>{cartData.items_count}</span>
                   )}
-                </span>
-                <ShoppingCartOutlined
-                  type={this.props.icon}
-                  style={{ fontSize: '25px', margin: '-15px' }}
-                />
-              </a>
-            </Link>
-            {/* {
-              cart.items.length > 0
-              ? <Cart freeShippingLimit={freeShippingLimit}
-                emptyThumbImg={this.props.config['product/image/no_img_thumb']} />
-              : <EmptyCart />
-            } */}
-            {/* <CartNotifier /> */}
-            {/* {
-              checkQty.length > 0 && (
-                <div className='cartNotifier show cartNotiOfStock'>
-                  <div style={{ color: 'red' }} className='cartError'><T>At least one product is out of stock in your cart</T></div>
-                </div>
-              )
-            } */}
-          </div>
-        )}
-      </>
-    )
-  }
+              </span>
+              <ShoppingCartOutlined
+                type={icon}
+                style={{ fontSize: '25px', margin: '-15px' }}
+              />
+            </a>
+          </Link>
+          {cart.items.length > 0 ? (
+            <Cart
+              freeShippingLimit={freeShippingLimit}
+              emptyThumbImg={this.props.config['product/image/no_img_thumb']}
+            />
+          ) : (
+            <EmptyCart />
+          )}
+          <CartNotifier />
+          {checkQty.length > 0 && (
+            <div className='cartNotifier show cartNotiOfStock'>
+              <div style={{ color: 'red' }} className='cartError'>
+                At least one product is out of stock in your cart
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </>
+  )
 }
 
-const mapState = (state) => ({
-  config: state.config,
-})
-
 export { Cart, CartItem, EmptyCart, CartHeading, CartSubtotal }
-export default connect(mapState)(MiniCart)
+export default MiniCart
