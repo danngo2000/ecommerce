@@ -11,10 +11,10 @@ export default memo(props => {
   const [shouldInitSwiper, setShouldInitSwiper] = useState(true)
 
   let Arrow = SlideArrow
-  let { products, showAddToCartButton, openNewWindow = false, slidesToShow = 6, lazy } = props
+  let { products, openNewWindow = false, slidesToShow = 6, lazy } = props
   let themeSettings = {}
 
-  const config = _config['site/theme/settings'] || {}
+  const config = _config['site/theme/settings']
   if (config) {
     if (config.productsSlider) themeSettings = config.productsSlider
     if (config.sliderArrow && config.sliderArrow === 'slim') Arrow = SlideArrowAlt

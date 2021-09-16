@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-// import { T, t } from 'locales'
+import React from 'react'
 import Link from 'next/link'
 import renderHTML from 'react-render-html'
 import Lazy from 'react-lazyload'

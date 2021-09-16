@@ -9,7 +9,6 @@ import { DebugObserver } from "components/DebugObserver";
 import { onClientStart } from "utils/client"
 import Head from 'next/head'
 import 'antd/dist/antd.css'
-import 'swiper/css';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_HOST
 axios.defaults.timeout = 30000

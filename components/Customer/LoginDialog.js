@@ -29,7 +29,6 @@ class LoginDialog extends React.Component {
     this.setState({ form: { ...form }, message: '' })
   }
 
-  
   handleClose = () => {
     this.props.toggleLoginDialog(false)
   }
@@ -72,6 +71,7 @@ class LoginDialog extends React.Component {
   handleLogin = async () => {
     if (this.validateAllFields()) {
       this.props.loginRequest(this.state.form.email, this.state.form.password)
+      this.props.onClose
     } else {
       this.setState({ message: 'Invalid email or password' })
     }
@@ -113,10 +113,10 @@ class LoginDialog extends React.Component {
         <Modal
           width='80%'
           title={null}
-          onCancel={this.handleClose}
+          onCancel={this.props.onClose}
           footer={null}
           className={`${theme} loginDialog bp3-dialog popupLight product-modal`}
-          visible={isLoginDialogOpen}
+          visible={this.props.openLoginDialog}
         >
           <div className='bp3-dialog-body'>
             <h1>
@@ -205,8 +205,8 @@ class LoginDialog extends React.Component {
                 </div>
               </div>
             ) : (
-            //   <RegisterForm />
-            ''
+              //   <RegisterForm />
+              ''
             )}
           </div>
         </Modal>
@@ -217,7 +217,7 @@ class LoginDialog extends React.Component {
 
 const mapState = (state) => ({
   config: state.config
-    // isLoginDialogOpen: state.ui.isLoginDialogOpen
+  // isLoginDialogOpen: state.ui.isLoginDialogOpen
 })
 
 export default connect(mapState, { toggleLoginDialog, loginRequest })(

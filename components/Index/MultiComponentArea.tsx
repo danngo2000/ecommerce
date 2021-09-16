@@ -5,7 +5,6 @@ import renderHTML from 'react-render-html'
 import { convertUrlAlias } from 'utils'
 import Lazy from 'react-lazyload'
 import RetinaImage from '../RetinaImage'
-// import { T, t } from 'locales'
 import { useSelector } from 'react-redux'
 
 interface Type {

@@ -1,10 +1,7 @@
-import Link from 'next/link'
 import React, { memo } from 'react'
 import { Button } from 'antd'
-import Swiper from '../CustomSwiper/index'
+import Swiper from '../CustomSwiper'
 import renderHTML from 'react-render-html'
-// import { T, t } from 'locales'
-import config from 'settings'
 import { SlideArrow } from './../Blocks/SlideArrow'
 import { SlideArrowAlt } from './../Blocks/SlideArrowAlt'
 import { convertUrlAlias } from 'utils'
@@ -21,11 +18,14 @@ export default memo((props) => {
   const _config = useSelector((state) => state.config)
   const themeSettings = _config['site/theme/settings'] || {}
   const theme = _config['site/theme']
-  const Arrow = (themeSettings.sliderArrow && themeSettings.sliderArrow === 'slim') ? SlideArrowAlt : SlideArrow
+  const Arrow =
+    themeSettings.sliderArrow && themeSettings.sliderArrow === 'slim'
+      ? SlideArrowAlt
+      : SlideArrow
   return (
     <div className={`bigSlide ${id || ''}`}>
       <div className='container'>
-        <Swiper options={swiperOptions}>
+        {/* <Swiper options={swiperOptions}>
           <Swiper.Wrapper>
             {data.banners.map((banner, index) => (
               <a href={banner.link} key={index}>
@@ -69,7 +69,7 @@ export default memo((props) => {
           {['pink-theme', 'yellow-theme'].includes(theme) && (
             <Swiper.Nav arrowIcon={Arrow} />
           )}
-        </Swiper>
+        </Swiper> */}
       </div>
     </div>
   )

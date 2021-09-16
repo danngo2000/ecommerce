@@ -12,12 +12,14 @@ import settings from '../../config/settings'
 import AccountTooltip from './AccountTooltip'
 import MiniCart from 'components/Cart/MiniCart'
 import { toggleLoginDialog } from '../../actions/ui'
+import LoginDialog from 'components/Customer/LoginDialog'
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false)
   const [fixed, setFixed] = useState(false)
   const [active, setActive] = useState(false)
   const [showSearchBar, setShowSearchBar] = useState(true)
+  const [openLoginDialog, setOpenLoginDialog] = useState(false)
   const { isGuest } = useSelector((state: any) => state.auth)
   const customer = useSelector((state: any) => state.customer)
   const config = useSelector((state: any) => state.config)
@@ -46,190 +48,197 @@ const Header = () => {
       : '/page?slug=flash-sale'
 
   return (
-    <div className='header'>
-      <div className='headerBox'>
-        <div
-          className={classNames('headerWrap fixed-container', {
-            scrolled,
-            fixed,
-            active: active || ''
-          })}
-        >
-          <div className='topMenu hideOnMobile'>
-            <div className='container top-bar-messenge'>
-              <Carousel autoplay>
-                <span className='topBarText top-bar-text'>
-                  {theme !== 'yellow-theme' && topBarMessenger}
-                  {theme === 'yellow-theme' && (
-                    <ul className='topCenterMenu'>
-                      {topBarText.map((item: any, index: any) => (
-                        <li>
-                          <div className='topBarText' key={index}>
-                            <Link href={`${item.slug}`}>
-                              <a>{item.title}</a>
-                            </Link>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </span>
-                {freeShippingText === '' ? (
-                  ''
-                ) : (
-                  <span className='free-shipping-top-bar top-bar-text'>
-                    {freeShippingText}
+    <>
+      <div className='header'>
+        <div className='headerBox'>
+          <div
+            className={classNames('headerWrap fixed-container', {
+              scrolled,
+              fixed,
+              active: active || ''
+            })}
+          >
+            <div className='topMenu hideOnMobile'>
+              <div className='container top-bar-messenge'>
+                <Carousel autoplay>
+                  <span className='topBarText top-bar-text'>
+                    {theme !== 'yellow-theme' && topBarMessenger}
+                    {theme === 'yellow-theme' && (
+                      <ul className='topCenterMenu'>
+                        {topBarText.map((item: any, index: any) => (
+                          <li>
+                            <div className='topBarText' key={index}>
+                              <Link href={`${item.slug}`}>
+                                <a>{item.title}</a>
+                              </Link>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </span>
-                )}
-              </Carousel>
-              <ul className='topSecondaryMenu'>
-                {topMenu &&
-                  topMenu.map((item, index) =>
-                    ['/customer/register', '/customer/login'].includes(
-                      item.as
-                    ) && !isGuest ? null : (
-                      <li key={index}>
-                        <Link href={`${item.href}`} as={`${item.as}`}>
-                          <a>{item.title}</a>
-                        </Link>
-                      </li>
-                    )
-                  )}
-              </ul>
-            </div>
-            <div className='clearfix' />
-          </div>
-          <div className='container'>
-            <div className='headerMain'>
-              <div
-                className={classNames('row', config.imexglobal)}
-                id='headerRow'
-              >
-                <div
-                  id='logoBox'
-                  className={`col1 logoBox ${showSearchBar && 'hideOnMobile'}`}
-                >
-                  <Logo />
-                </div>
-                <div
-                  className={
-                    theme === 'yellow-theme'
-                      ? 'mainMenuLogo logoImex'
-                      : 'mainMenuLogo '
-                  }
-                >
-                  <TheMainMenu />
-                </div>
-                <div id='searchBarBox' className='col2 searchBarBox'>
-                  <div className='searchShowBtn' onClick={toggleSearchBar}>
-                    <Icon.SearchOutlined />
-                  </div>
-                  <div className={'searchBar' + (showSearchBar ? ' show' : '')}>
-                    <SearchInput q={props.q} />
-                  </div>
-                </div>
-                <div className='col3 user-nav hideOnMobile'>
-                  {!['yellow-theme'].includes(theme) && (
-                    <>
-                      {settings.theme && settings.theme === 'blue' ? (
-                        ''
-                      ) : (
-                        <Link as={as} href={href}>
-                          <a className='flashSaleBtn'>
-                            <img
-                              src='/static/images/svg/white-flash-sale.svg'
-                              alt=''
-                            />
-                            <button className={`btnFS ${theme}`}>
-                              Flash Sale
-                            </button>
-                          </a>
-                        </Link>
-                      )}
-                    </>
-                  )}
-
-                  {settings.theme && settings.theme === 'blue' ? (
+                  {freeShippingText === '' ? (
                     ''
                   ) : (
-                    <Link href='/community' as='/community'>
-                      <div className='notificationHeaderBlock'>
-                        <Button className=' notification-button'>
-                          <Icon.CommentOutlined />
-                          <p className='title'>Community</p>
-                        </Button>
-                      </div>
-                    </Link>
+                    <span className='free-shipping-top-bar top-bar-text'>
+                      {freeShippingText}
+                    </span>
                   )}
-                  {!isGuest ? (
-                    <Link
-                      as='/customer/dashboard'
-                      href='/customer?subPage=dashboard'
+                </Carousel>
+                <ul className='topSecondaryMenu'>
+                  {topMenu &&
+                    topMenu.map((item, index) =>
+                      ['/customer/register', '/customer/login'].includes(
+                        item.as
+                      ) && !isGuest ? null : (
+                        <li key={index}>
+                          <Link href={`${item.href}`} as={`${item.as}`}>
+                            <a>{item.title}</a>
+                          </Link>
+                        </li>
+                      )
+                    )}
+                </ul>
+              </div>
+              <div className='clearfix' />
+            </div>
+            <div className='container'>
+              <div className='headerMain'>
+                <div
+                  className={classNames('row', config.imexglobal)}
+                  id='headerRow'
+                >
+                  <div
+                    id='logoBox'
+                    className={`col1 logoBox ${
+                      showSearchBar && 'hideOnMobile'
+                    }`}
+                  >
+                    <Logo />
+                  </div>
+                  <div
+                    className={
+                      theme === 'yellow-theme'
+                        ? 'mainMenuLogo logoImex'
+                        : 'mainMenuLogo '
+                    }
+                  >
+                    <TheMainMenu />
+                  </div>
+                  <div id='searchBarBox' className='col2 searchBarBox'>
+                    <div className='searchShowBtn' onClick={toggleSearchBar}>
+                      <Icon.SearchOutlined />
+                    </div>
+                    <div
+                      className={'searchBar' + (showSearchBar ? ' show' : '')}
                     >
-                      <a
+                      <SearchInput q={props.q} />
+                    </div>
+                  </div>
+                  <div className='col3 user-nav hideOnMobile'>
+                    {!['yellow-theme'].includes(theme) && (
+                      <>
+                        {settings.theme && settings.theme === 'blue' ? (
+                          ''
+                        ) : (
+                          <Link as={as} href={href}>
+                            <a className='flashSaleBtn'>
+                              <img
+                                src='/static/images/svg/white-flash-sale.svg'
+                                alt=''
+                              />
+                              <button className={`btnFS ${theme}`}>
+                                Flash Sale
+                              </button>
+                            </a>
+                          </Link>
+                        )}
+                      </>
+                    )}
+
+                    {settings.theme && settings.theme === 'blue' ? (
+                      ''
+                    ) : (
+                      <Link href='/community' as='/community'>
+                        <div className='notificationHeaderBlock'>
+                          <Button className=' notification-button'>
+                            <Icon.CommentOutlined />
+                            <p className='title'>Community</p>
+                          </Button>
+                        </div>
+                      </Link>
+                    )}
+                    {!isGuest ? (
+                      <Link
+                        as='/customer/dashboard'
+                        href='/customer?subPage=dashboard'
+                      >
+                        <a
+                          className={
+                            theme === 'yellow-theme'
+                              ? 'myAccountLink myAccountImex'
+                              : 'myAccountLink'
+                          }
+                        >
+                          {!isGuest && (
+                            <label className='my-account-text'>
+                              Hi,
+                              {customer.first_name
+                                ? customer.first_name
+                                : customer.last_name}
+                            </label>
+                          )}
+                          <Popover
+                            overlayClassName={`popover-notification myAccountNotification ${
+                              scrolled ? 'scrolled' : ''
+                            }`}
+                            placement='bottomRight'
+                            content={<AccountTooltip />}
+                            trigger='hover'
+                          >
+                            <Button type='ghost'>
+                              <Icon.UserOutlined />
+                              My Account
+                            </Button>
+                          </Popover>
+                        </a>
+                      </Link>
+                    ) : (
+                      <div
                         className={
                           theme === 'yellow-theme'
                             ? 'myAccountLink myAccountImex'
                             : 'myAccountLink'
                         }
                       >
-                        {!isGuest && (
-                          <label className='my-account-text'>
-                            Hi,
-                            {customer.first_name
-                              ? customer.first_name
-                              : customer.last_name}
-                          </label>
-                        )}
-                        <Popover
-                          overlayClassName={`popover-notification myAccountNotification ${
-                            scrolled ? 'scrolled' : ''
-                          }`}
-                          placement='bottomRight'
-                          content={<AccountTooltip />}
-                          trigger='hover'
-                        >
-                          <Button type='ghost'>
-                            <Icon.UserOutlined />
-                            My Account
-                          </Button>
-                        </Popover>
+                        <Button onClick={() => setOpenLoginDialog(true)}>
+                          <Icon.UserOutlined />
+                          My Account
+                        </Button>
+                      </div>
+                    )}
+                    <Link href='/customer/myWishlist'>
+                      <a className='wishlistLink'>
+                        <Button icon={<Icon.HeartOutlined />}>Wishlist</Button>
                       </a>
                     </Link>
-                  ) : (
-                    <div
-                      className={
-                        theme === 'yellow-theme'
-                          ? 'myAccountLink myAccountImex'
-                          : 'myAccountLink'
-                      }
-                    >
-                      <Button onClick={() => toggleLoginDialog}>
-                        <Icon.UserOutlined />
-                        My Account
-                      </Button>
-                    </div>
-                  )}
-                  <Link href='/customer/myWishlist'>
-                    <a className='wishlistLink'>
-                      <Button icon={<Icon.HeartOutlined />}>Wishlist</Button>
-                    </a>
-                  </Link>
-                  <MiniCart icon={'shopping-cart'} text={cartText} />
+                    <MiniCart icon={'shopping-cart'} text={cartText} />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        {themeSettings && themeSettings.mainMenuPosition === 'under' && (
-          <div className='mainMenu'>
-            <div className='container'>
-              <TheMainMenu />
+          {themeSettings && themeSettings.mainMenuPosition === 'under' && (
+            <div className='mainMenu'>
+              <div className='container'>
+                <TheMainMenu />
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+      <LoginDialog openLoginDialog={openLoginDialog} onClose={() => setOpenLoginDialog(false)}/>
+    </>
   )
 }
 

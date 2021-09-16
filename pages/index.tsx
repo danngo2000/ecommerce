@@ -1,12 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchConfig } from 'actions/config'
-import { RootState, wrapper } from 'store'
+import { wrapper } from 'store'
 import { END } from 'redux-saga'
 import Layout from 'components/Layout'
 import HomePage from '../components/Index/HomePage'
 import React from 'react'
 import { fetchCategories } from 'actions/categories'
-import { AuthActions } from 'actions/authV1'
 import { NextSeo } from 'next-seo'
 import axios from 'axios'
 

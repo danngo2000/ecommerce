@@ -8,7 +8,7 @@
       display: none;
     }
     padding-top: 7.9rem;
-    transition: all ease var(--header-transition-duration, 0.5s);
+    transition: all ease $header-transition-duration;
     .categoriesOnMobile {
       display: none;
     }
@@ -28,7 +28,7 @@
   }
   .compound-banner {
     min-height: auto;
-    max-width: 1300px;
+    max-width: $breakpoint-xl;
     width: 95%;
     margin-bottom: 1rem;
     margin-left: auto;
@@ -82,14 +82,14 @@
           line-height: 1.4;
           margin-bottom: 3rem;
           span {
-            color: var(--red-color, #d80638);
+            color: $red-color;
           }
         }
 
         &.no-title {
           right: 20%;
           top: 72%;
-          @media only screen and (max-width: 719px) {
+          @include mediaquery-sm {
             right: 12%;
             top: 79%;
           }
@@ -111,7 +111,7 @@
 
     .compound-banner--small-banners.featured-banners {
       grid-area: banners;
-      @media only screen and (max-width: 719px) {
+      @include mediaquery-sm() {
         margin-top: 0;
       }
       .container {
@@ -133,14 +133,14 @@
   .container {
     .title-deal-zone {
       margin-bottom: unset;
-      @media only screen and (min-width: 720px) {
+      @include mediaquery-min($breakpoint-md) {
         margin-bottom: -1rem;
       }
     }
     .link-outside-deal-zone {
       display: none;
     }
-    @media screen and (max-width: 720px) {
+    @media screen and (max-width: $breakpoint-md) {
       .content-outside {
         padding: 0px 10px 3px 5px;
         display: flex;
@@ -166,7 +166,7 @@
 
   .featuredBox.brandSlider.searches {
     margin: 20px 0;
-    @media screen and (max-width: 720px) {
+    @media screen and (max-width: $breakpoint-md) {
       margin-top: unset;
       margin-bottom: unset;
       .header {
@@ -203,7 +203,7 @@
 
   .product-category-thumbs {
     background: transparent;
-    @media only screen and (min-width: 720px) {
+    @include mediaquery-min($breakpoint-md) {
       margin-bottom: 30px;
     }
     .container {
@@ -215,7 +215,7 @@
     .categories-wrapper {
       align-items: stretch;
       justify-content: space-between;
-      @media only screen and (max-width: 719px) {
+      @include mediaquery-sm {
         overflow-x: scroll;
       }
     }
@@ -225,11 +225,11 @@
     .item {
       border: none;
       flex: 0 1 11.11%;
-      @media only screen and (max-width: 996px) {
+      @include mediaquery-max($breakpoint-lg) {
         flex: 0 1 20%;
         padding: 1rem;
       }
-      @media only screen and (max-width: 384px) {
+      @include mediaquery-max(384px) {
         flex: 1 0 100px;
         padding-bottom: 20px;
       }
@@ -276,7 +276,7 @@
     }
   }
 
-  @media only screen and (min-width: 720px) {
+  @include mediaquery-min($breakpoint-md) {
     .featuredBox.dealZone.WrapItem {
       background: unset;
       width: 101%;
@@ -309,7 +309,8 @@
             opacity: 0;
             transform: scale(0.9);
           }
-          @media only screen and (max-width: 1240px) {
+
+          @include mediaquery-max(1240px) {
             width: 24.3%;
           }
           .add-to-cart-groups {
@@ -415,7 +416,6 @@
       }
     }
   }
-
   @media screen and (min-width: 996px) {
     .featuredBox.dealZone.WrapItem {
       .productItem {
@@ -434,15 +434,14 @@
     position: relative;
     padding: unset;
     background: #fff;
-    @media only screen and (min-width: 720px) {
+    @include mediaquery-min($breakpoint-md) {
       margin-bottom: 20px;
     }
-
     .header {
       position: static;
       padding: 15px 20px;
       margin-bottom: unset;
-      @media only screen and (min-width: 720px) {
+      @include mediaquery-min($breakpoint-md) {
         border-bottom: 1px solid #d5d5d5;
       }
       .swiper-wrapper {
@@ -488,13 +487,12 @@
     }
     .content {
       padding: 10px;
-      @media only screen and (max-width:719px) {
+      @include mediaquery-sm {
         padding-right: 10%;
         overflow: hidden;
       }
     }
-
-    @media screen and (max-width: 720px) {
+    @media screen and (max-width: $breakpoint-md) {
       padding: unset;
       .swiper-slide {
         margin-left: unset;
@@ -566,7 +564,7 @@
         .bp3-icon-arrow-right {
           padding-left: 0.5rem;
           svg {
-            fill: red;
+            fill: $red-color;
           }
         }
       }
@@ -574,7 +572,7 @@
     .flex-content {
       padding: 10px 20px 20px;
       .left-sub-banner {
-        @media only screen and (max-width:719px) {
+        @include mediaquery-sm() {
           display: none;
         }
       }
@@ -670,6 +668,7 @@
       background: #fff;
       display: flex;
       flex-flow: row wrap;
+      padding-bottom: 10px;
       margin-bottom: 20px;
       .header {
         padding: 1rem;
@@ -808,7 +807,6 @@
           .title {
             left: 10%;
             top: 18%;
-            /* transform: translateY(-50%); */
             font-size: 22px;
             font-weight: 600;
             color: #000;
@@ -895,10 +893,6 @@
       grid-template-areas: 'slider' 'banners';
       grid-template-columns: 100%;
       grid-row-gap: 2rem;
-      background-image: var(
-        --header-gradient,
-        linear-gradient(90deg, #f15826 0%, #e51e79 49%, #6a2d91 100%)
-      );
       background-repeat: no-repeat;
       background-size: 100% 20%;
       width: 100%;
@@ -946,8 +940,6 @@
             flex: 0 0 49%;
             padding: 0;
             padding-top: 1rem;
-            /* &:nth-child(2) { padding-left: 1rem; }
-             &:nth-child(3) { padding-right: 1rem; } */
             &:last-child {
               display: none;
               @include mediaquery-sm() {
@@ -964,11 +956,6 @@
         }
       }
     }
-    /* .featuredBox,
-    .featuredBox.dealZone {
-       padding-left: 1rem;
-       padding-right: 1rem;
-    } */
     .featuredBox {
       margin-top: 1rem;
       .header {
@@ -1104,11 +1091,6 @@
         }
       }
     }
-    /*  .featured-banners:not(.compound-banner--small-banners) {
-      .container.of-3 .bg-first.banner {
-         flex: 0 1 100%;
-       }
-     } */
   }
   @media only screen and (min-width: $breakpoint-sm) {
     .flex-box {
@@ -1116,8 +1098,6 @@
     }
   }
   @include mediaquery-max($breakpoint-md) {
-    .main-content {
-    }
     .bigSlide {
       .banner > img {
         max-height: 33vw;
@@ -1174,7 +1154,6 @@
         margin-top: 10px;
       }
     }
-    /* Responsive Header Mobile  */
   }
   @include mediaquery-max($breakpoint-md) {
     &.mainLayout {
@@ -1265,6 +1244,7 @@
                 width: 1.3rem;
                 height: 1.3rem;
                 border-radius: 50%;
+                /* z-index: 10; */
                 text-align: center;
                 font-size: 11px;
               }

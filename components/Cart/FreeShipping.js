@@ -7,7 +7,8 @@ class FreeShipping extends Component {
   countToFree = (value) => {
     return (
       <Fragment>
-        <Price price={value} /> to FREE shipping!
+        {/* <Price price={value} /> */}
+         to FREE shipping!
       </Fragment>
     )
   }

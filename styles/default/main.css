@@ -27,7 +27,7 @@
 @import 'pages/customer';
 @import 'pages/order';
 @import 'pages/landing';
-/* @import 'pages/blog'; */
+@import 'pages/blog';
 @import 'pages/recipe';
 @import 'pages/recipecontent';
 

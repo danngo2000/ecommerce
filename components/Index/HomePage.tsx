@@ -30,31 +30,29 @@ const ComponentRender = ({ item, data }) => {
     case 'slider':
       return <SuperHeroBanner {...item} />
     case 'products':
-      return <FeaturedBox {...item} />
-    // case 'products':
-    //   if (item.display === 'flex') {
-    //     return <FeaturedBoxFlex {...item} />
-    //   }
-    //   else {
-    //     return <FeaturedBox {...item} />
-    //   }
+      if (item.display === 'flex') {
+        return <FeaturedBoxFlex {...item} />
+      }
+      else {
+        return <FeaturedBox {...item} />
+      }
     case 'lazy-load-products':
       return <LazyFeaturedBox {...item} />
     case 'feature-banner':
       return <FeaturedBannerBox {...item} />
     case 'deal-zone-products':
       return <DealZone {...item} dateTime={data.dateTime} />
-    // case 'product-by-categories':
-    //   if (item.data.display && item.data.display === 'flex') {
-    //     return <ProductCategoriesFlex {...item} />
-    //   }
-    //   else {
-    //     return <ProductCategories {...item} />
-    //   }
-    case 'icon-slider':
+    case 'product-by-categories':
+      if (item.data.display && item.data.display === 'flex') {
+        return <ProductCategoriesFlex {...item} />
+      }
+      else {
+        return <ProductCategories {...item} />
+      }
+    case 'icon-slider': 
       return <IconSlider {...item} />
-    // case 'multiple-feature-banners':
-    //   return <MultipleFeatureBannersBox {...item} />
+    case 'multiple-feature-banners':
+      return <MultipleFeatureBannersBox {...item} />
     case 'multiple-component-area':
       return <MultiComponentArea {...item} />
     case 'big-slider':
