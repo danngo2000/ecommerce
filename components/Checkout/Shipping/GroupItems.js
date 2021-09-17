@@ -80,12 +80,12 @@ class GroupItems extends React.PureComponent {
               alt=''
             />
             <span>
-              <T>Order</T> {orderNumber}&nbsp;
+              Order {orderNumber}&nbsp;
               {isDropship ? (
-                <T>Dropship</T>
+                Dropship
               ) : (
                 <>
-                  <T>Sold by</T> {sellerName}
+                  Sold by {sellerName}
                 </>
               )}
               {/* {
@@ -95,8 +95,8 @@ class GroupItems extends React.PureComponent {
                     <p>{freeShipConfig.description}</p>
                   </div>
                   : isDropship
-                    ? <T>Dropship</T>
-                    : <><T>Sold by</T> {sellerName}</>
+                    ? Dropship
+                    : <>Sold by {sellerName}</>
               } */}
             </span>
           </h4>
@@ -105,7 +105,7 @@ class GroupItems extends React.PureComponent {
           <div className='rates'>
             {canNotShip ? (
               <p className='errLabel'>
-                <T>Can't ship to your address</T>
+                Can't ship to your address
               </p>
             ) : (
               <ul>
@@ -143,7 +143,7 @@ class GroupItems extends React.PureComponent {
                             <label
                               htmlFor={`${method.service_api_code}_${index}_${shippingKey}`}
                             >
-                              {t(method.service_name)}
+                              {method.service_name}
                             </label>
                           </div>
                           <DeliveryDays method={method} />
@@ -204,7 +204,7 @@ class GroupItems extends React.PureComponent {
                 this.setState((state) => ({ showDetails: !state.showDetails }))
               }
             >
-              {showDetails ? t('Less') : t('Show Detail')}
+              {showDetails ? 'Less' : 'Show Detail'}
             </Button>
           </div>
         </div>

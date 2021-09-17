@@ -1,167 +1,127 @@
-import { TextField } from "@material-ui/core"
-import React from "react"
+import React, { useState, useEffect } from 'react'
+import AddressForm from 'components/Checkout/Addresses/AddressForm'
+import { CheckoutStep } from '../../../store/interfaces'
+// import AddressBox from 'components/Checkout/Addresses/AddressBox'
+// import AddressList from 'components/Checkout/Addresses/AddressList'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeCheckoutStep } from 'actions/checkout'
+import { RootState } from 'store'
+import { createSelector } from 'reselect'
+import { IAddress } from 'interfaces'
+import { FormProvider, useForm, SubmitHandler } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import { clearCartAddress, setCartAddress } from 'store/reducers/cart'
+import { checkoutPlaceOrderRequest, placeOrder } from 'actions/checkout'
+import { getCustomerDefaultAddressesRequest } from 'store/services/cart'
+import { getDefaultAddressSuccess } from 'actions/customer'
+import { useAppSelector } from 'utils/redux'
+import AddressList from './AddressList'
+import AddressBox from './AddressBox'
 
-function index() {
+export const addressSelector = createSelector(
+  (state: RootState) => state.cart.address,
+  (address) => ({
+    defaultShipping: address.shipping,
+    defaultBilling: address.billing,
+    billingSameAddress: address.billing_same_shipping
+  })
+)
+
+const schema = yup.object().shape({
+  first_name: yup.string().required(),
+  last_name: yup.string().required(),
+  phone_number: yup.string().required(),
+  address: yup.string().required(),
+  city: yup.string().required(),
+  email: yup.string().email().required(),
+  zip_code: yup.string().required(),
+  state: yup.string().required(),
+  country: yup.string().required()
+})
+
+const AddressStep = ({ scrollTo }: any) => {
+  const dispatch = useDispatch()
+  const { defaultShipping, defaultBilling, billingSameAddress } = useSelector(
+    (state: RootState) => addressSelector(state)
+  )
+  const cart: any = useAppSelector((state) => state.cart)
+  const step = useSelector((state: RootState) => state.checkout.step)
+  const isGuest = useSelector((state: RootState) => state.auth.isGuest)
+  const [openAddressForm, setOpenAddressForm] = useState(false)
+  const [addressKey, setAddressKey] = useState<'shipping' | 'billing'>(
+    'shipping'
+  )
+
+  const methods = useForm<IAddress>({
+    resolver: yupResolver(schema)
+  })
+
+  useEffect(() => {
+    dispatch(clearCartAddress())
+    if (isGuest) return
+    async function fetchCustomerAddresses() {
+      const address = await getCustomerDefaultAddressesRequest()
+      dispatch(getDefaultAddressSuccess(address))
+      dispatch(setCartAddress(address ? address.default_shipping : null))
+    }
+    fetchCustomerAddresses()
+    if (cart?.address?.shipping) setOpenAddressForm(true)
+  }, [])
+
+  const handleNewAddress: SubmitHandler<IAddress> = (address: IAddress) => {
+    console.log('address', address)
+    dispatch(setCartAddress(address, addressKey))
+    dispatch(changeCheckoutStep('shipping'))
+    setOpenAddressForm(false)
+  }
+
   return (
-    <div className={"step grow step-address active"}>
-      <h3>
+    <div
+      className={
+        'step grow stepAddress' +
+        (step === CheckoutStep.Address ? ' active' : '')
+      }
+    >
+      <h3 onClick={() => dispatch(changeCheckoutStep('address'))}>
         <span className='number'>1</span>
-                Delivery Contact &amp; Address
+        Delivery Contact & Address
       </h3>
-      <div className='step-content'>
-        <div className='address-form row'>
-          <div className='field'>
-            <TextField
-              label='First name'
-              placeholder='First name'
-              fullWidth
-              margin='normal'
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant='outlined'
-              name='first_name'
-              id='first_name'
-
-            />
-            <div className='error' id='first_nameError' />
-          </div>
-          <div className='field'>
-            <TextField
-              label='Last name'
-              placeholder='Last name'
-              fullWidth
-              margin='normal'
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant='outlined'
-              name='last_name'
-              id='last_name'
-            />
-            <div className='error' id='last_nameError' />
-          </div>
-          <div className='field'>
-            <TextField
-              label='Email Address'
-              placeholder='Email Address'
-              type='email'
-              fullWidth
-              margin='normal'
-              variant='outlined'
-              InputLabelProps={{
-                shrink: true,
-              }}
-              name='email'
-              id='email'
-            />
-            <div className='error' id='emailError' />
-          </div>
-          <div className='field'>
-            <TextField
-              label='Phone Number '
-              placeholder='Phone Number'
-              fullWidth
-              type='number'
-              margin='normal'
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant='outlined'
-              name='phone_number'
-              id='phone_number'
-            />
-            <div className='error' id='phone_numberError' />
-          </div>
-          <div className='fullField'>
-            <TextField
-              label='Address'
-              placeholder='Your address, Apartment/Building Name'
-              fullWidth
-              margin='normal'
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant='outlined'
-              name='address'
-              id='address'
-
-            />
-            <div className='error' id='addressError' />
-          </div>
-          <div className='field'>
-            <TextField
-              label='Zipcode/Postcode'
-              placeholder='Zip code'
-              fullWidth
-              margin='normal'
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant='outlined'
-              name='zip_code'
-              id='zip_code'
-
-            />
-            <div className='error' id='zip-codeError' />
-          </div>
-          <div className='field'>
-            <TextField
-              label='City'
-              placeholder='City'
-              fullWidth
-              margin='normal'
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant='outlined'
-              name='city'
-              id='city'
-
-            />
-            <div className='error' id='cityError' />
-          </div>
-          <div className='field'>
-            <TextField
-              fullWidth
-              label='Country'
-              select
-              margin='normal'
-              value={0}
-              variant='outlined'
-              SelectProps={{
-                native: true,
-              }}
-              id='country'
-              name='country'
+      <div className='stepContent'>
+        {!defaultShipping || openAddressForm ? (
+          <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(handleNewAddress)}>
+              <AddressForm />
+              <button
+                type='submit'
+                onClick={methods.handleSubmit(handleNewAddress)}
+                className='btn btnNextStep'
+              >
+                Continue
+              </button>
+            </form>
+          </FormProvider>
+        ) : (
+          <div>
+            <div className='shipTo'>Ship to:</div>
+            <div className='shipTo'>Billing to:</div>
+            <button
+              className='btn btnNextStep'
+              onClick={() =>
+                scrollTo(
+                  'stepAddress',
+                  50,
+                  dispatch(changeCheckoutStep('shipping'))
+                )
+              }
             >
-              <option value={0}>Viet Nam</option>
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-            </TextField>
-            <div className='error' id='countryError' />
+              Continue
+            </button>
           </div>
-          <div className='field'>
-            <TextField
-              label='State/Province'
-              placeholder='State/Province'
-              fullWidth
-              margin='normal'
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant='outlined'
-              name='state'
-              id='state'
-
-            />
-            <div className='error' id='stateError' />
-          </div>
-        </div>
-        <button className='btn btnNextStep'>Continue</button>
+        )}
       </div>
     </div>
   )
 }
 
-export default index
+export default AddressStep

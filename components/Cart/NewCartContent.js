@@ -4,7 +4,7 @@ import { Checkbox, Button, Input, Tooltip } from 'antd'
 import { groupItemsBySeller } from '../Checkout/Shipping/ShippingRatesBySeller'
 import QtyInput from './QtyInput'
 import classNames from 'classnames'
-import { Price } from '../Product/Price'
+import Price from '../Product/Price'
 // import ProductSlider from '../Product/ProductSlider'
 import { useRouter } from 'next/router'
 import { ClockCircleOutlined, CloseOutlined } from '@ant-design/icons'
@@ -12,22 +12,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { makeOrderItemLink } from 'utils'
 import Link from 'next/link'
 import Stock from '../Product/Notice/Stock'
-// import { toggleLoginDialog } from 'actions/ui'
-// import {
-//   applyCoupon,
-//   changeCartItemQuantity,
-//   removeCoupon,
-//   removeFromCart,
-//   saveForLater,
-//   toggleCartItems,
-//   updateCart
-// } from '../../actions/cart'
-// import { changeCheckoutStep, goToCheckout } from '../../actions/checkout'
-// import { CheckoutStep } from '../../interfaces'
+import {
+  changeCartItemQuantity,
+  removeFromCart,
+  toggleCartItems
+} from 'actions/cart'
+import { verifyCarts } from 'store/services/cart'
+import { updateCart } from 'actions/cart'
+import { changeCheckoutStep, goToCheckout } from 'actions/checkout'
+import { CheckoutStep } from '../../store/interfaces'
 
 const NewCartContent = () => {
   const cart = useSelector((state) => state.cart)
-  const productsInCart = cart.items?.map((item) => item.product_id) || []
+  const productsInCart = cart.items.map((item) => item.product_id)
   const config = useSelector((state) => state.config)
   const isGuest = useSelector((state) => state.auth.isGuest)
   const router = useRouter()
@@ -40,6 +37,8 @@ const NewCartContent = () => {
   const [groupSelected, setGroupSelected] = useState([])
   const [allSelected, setAllSelected] = useState(true)
   const [products, setProducts] = useState([])
+
+  const [count, setCount] = useState(1)
 
   useMemo(() => {
     const group = groupItemsBySeller(cart.items, false)
@@ -82,10 +81,13 @@ const NewCartContent = () => {
     window.scrollTo(0, 0)
   }, [router.query.id])
 
-  const handleItemDecrease = (item) =>
+  const handleItemDecrease = (item) => {
     dispatch(changeCartItemQuantity(item.product_id, item.qty - 1))
+  }
+
   const handleItemIncrease = (item) =>
     dispatch(changeCartItemQuantity(item.product_id, item.qty + 1))
+
   const handleItemCheckboxChange = (e, item) => {
     dispatch(
       toggleCartItems(
@@ -111,20 +113,22 @@ const NewCartContent = () => {
 
   const handleGoToCheckout = async () => {
     if (1 || !isGuest) {
-      const {
-        data: { cart }
-      } = await axios.post('quotes/verify')
+      const { cart } = await verifyCarts()
       if (cart) {
         dispatch(updateCart(cart))
         dispatch(changeCheckoutStep(CheckoutStep.Address))
         if (
           cart.items &&
-          cart.items.some((e) => e.product && e.product.quantity > 0)
+          cart.items.some(
+            (event) => event.product && event.product.quantity > 0
+          )
         ) {
           dispatch(goToCheckout())
+          router.push('/checkout')
         }
       }
-    } else dispatch(toggleLoginDialog(true))
+    }
+    //  else dispatch(toggleLoginDialog(true))
   }
   return (
     <div className='container new-cart-container'>
@@ -251,10 +255,7 @@ const NewCartContent = () => {
                           Delete
                         </Button>
                         {!isGuest && (
-                          <Tooltip
-                            title={t('Save for later')}
-                            placement='bottom'
-                          >
+                          <Tooltip title={'Save for later'} placement='bottom'>
                             <ClockCircleOutlined
                               className='remove-item'
                               style={{ fontSize: '16px' }}
@@ -415,10 +416,7 @@ const NewCartContent = () => {
             <div className='right d-flex align-items-start'>
               <span style={{ marginTop: 5 }}>
                 Total&nbsp;
-                <span className='count'>
-                  {/* ({cart.items_count} {items}) */}
-                </span>
-                :
+                <span className='count'>({cart.items_count} items)</span>:
               </span>
               <span className='grand-total-price'>
                 <Price price={cart.grand_total} />
@@ -458,12 +456,12 @@ const NewCartContent = () => {
             <h2>Just for you</h2>
           </div>
           <div className='content-cross-sale'>
-            <ProductSlider
+            {/* <ProductSlider
               slidesToShow={6}
               openNewWindow
               products={products}
               showAddToCartButton
-            />
+            /> */}
           </div>
         </div>
       )}

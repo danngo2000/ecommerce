@@ -16,8 +16,6 @@ import { makeOrderItemLink } from 'utils'
 import CartDrawer from './CartDrawer'
 import CartNotifier from './CartNotifier'
 import { toggleCartDrawer, toggleLoginDialog } from '../../actions/ui'
-// import { changeCartItemQuantity, removeFromCart, saveForLater, updateCart } from '../../actions/cart'
-// import { goToCheckout } from '../../actions/checkout'
 
 const Cart = React.memo((props) => {
   return (
@@ -78,22 +76,21 @@ const CartSubtotal = React.memo((props) => {
         <strong>Grandtotal</strong> ({cart?.items_count}&nbsp;
         {cart.items_count > 1 ? 'items' : 'item'})
       </div>
-      <div className='subtotal-price-cart'>
-        {/* <Price price={cart.grand_total} /> */}
-      </div>
+      <div className='subtotal-price-cart'></div>
     </div>
   )
 })
 
 const CartItem = React.memo((props) => {
   let { emptyThumbImg } = props
-  const { cartData } = useAppSelector((state) => state.cart)
+  const cart = useSelector((state) => state.cart)
   const isGuest = useSelector((state) => state.auth.isGuest)
   const dispatch = useDispatch()
 
+  console.log('cart', cart.items)
   return (
-    Array.isArray(cartData.items) &&
-    cartData.items.map((item, index) => {
+    Array.isArray(cart.items) &&
+    cart.items.map((item, index) => {
       if (!item.product) return null
       let saleOfPercent = Math.round(
         100 - (item.price / item.original_price) * 100
@@ -189,6 +186,7 @@ const CartItem = React.memo((props) => {
             <div className='priceWrap'>
               {
                 <div className='price'>
+                  {item.row_total}
                   <Price price={item.row_total} />
                 </div>
               }

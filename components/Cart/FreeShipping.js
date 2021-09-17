@@ -1,15 +1,14 @@
 
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import Price from '../Product/Price'
 import { connect } from 'react-redux'
 
 class FreeShipping extends Component {
   countToFree = (value) => {
     return (
-      <Fragment>
-        {/* <Price price={value} /> */}
-         to FREE shipping!
-      </Fragment>
+      <>
+        <Price price={value} />to FREE shipping!
+      </>
     )
   }
 

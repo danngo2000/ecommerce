@@ -2,6 +2,8 @@ import {Cart, Customer} from '../store/interfaces';
 // import config from 'settings';
 // import {t} from 'locales';
 import Router from 'next/router';
+import { ICart } from 'interfaces/ICart';
+import { ICustomer } from 'interfaces';
 // import {Modal} from 'antd';
 
 export const calculateGrandTotal = (cart: any, shippingCost: number) => {
@@ -32,20 +34,19 @@ export const isLimitShippingCostLower = (cart: any) => {
   return isLower
 }
 
-// export const isCartAddressValid = (cart: Cart, customer?: Customer) => {
-//   if (customer?.address?.default_shipping) return true
-//   return cart.isAddressValid
-// }
-
-// export const isCartValid = (cart: Cart, customer?: Customer) => {
-//   // if (isGuest) return false
-//   if (!cart.payment_method || !cart.payment_method.method) return false
-//   const noAllowCod = cart.items
-//       .filter(i => i.is_selected)
-//       .some(i => i.product_type === 'gift_card')
-//   if (noAllowCod && cart.payment_method && cart.payment_method.method === 'cod') return false
-//   return isCartAddressValid(cart, customer)
-// }
+export const isCartAddressValid = (cart: ICart, customer?: ICustomer) => {
+  if (customer?.address?.default_shipping) return true
+  return cart.isAddressValid
+}
+export const isCartValid = (cart: ICart, customer?: ICustomer) => {
+  // if (isGuest) return false
+  if (!cart.payment_method || !cart.payment_method.method) return false
+  const noAllowCod = cart.items
+      .filter(i => i.is_selected)
+      .some(i => i.product_type === 'gift_card')
+  if (noAllowCod && cart.payment_method && cart.payment_method.method === 'cod') return false
+  return isCartAddressValid(cart, customer)
+}
 
 export const handleCheckoutError = (content:any, order?:any) => {
   const errorProps: any = {

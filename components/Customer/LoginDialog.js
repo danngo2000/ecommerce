@@ -2,7 +2,7 @@ import React from 'react'
 import { Input, Modal } from 'antd'
 import Link from 'next/link'
 import { connect } from 'react-redux'
-import ExternalLogin from '../ExternalLogin'
+// import ExternalLogin from '../ExternalLogin'
 // import RegisterForm from './RegisterForm'
 import { toggleLoginDialog, isLoginDialogOpen } from '../../actions/ui'
 import { loginRequest } from '../../actions/auth'
@@ -217,7 +217,6 @@ class LoginDialog extends React.Component {
 
 const mapState = (state) => ({
   config: state.config
-  // isLoginDialogOpen: state.ui.isLoginDialogOpen
 })
 
 export default connect(mapState, { toggleLoginDialog, loginRequest })(

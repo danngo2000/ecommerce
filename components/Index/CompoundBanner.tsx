@@ -4,9 +4,7 @@ import MultipleFeatureBannersBox from './MultipleFeatureBannersBox'
 import ProductCategoriesSuper from './ProductCategoriesSuper'
 
 const CompoundBanner = ({ data }) => {
-  console.log('data', data);
-  
-  if (data.templates) {
+  if (data?.templates) {
     return (
       <div className='compound-banner'>
         {data.templates.map((template: any, i: number) => {

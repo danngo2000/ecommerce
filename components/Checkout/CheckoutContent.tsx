@@ -1,210 +1,249 @@
 import React, { useState } from 'react'
-import { Step, StepLabel, Stepper, TextField } from '@material-ui/core'
-import { FormProvider, useForm, SubmitHandler } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import { IAddress } from 'interfaces'
-import Image from 'next/image'
-import { imageLoader } from 'utils'
-import AddressForm from './Addresses/AddressForm'
+import { Steps } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
+import LoginDialog from 'components/Customer/LoginDialog'
+import AddressStep from './Addresses'
+import { scroller } from 'react-scroll'
+import { CheckoutStep } from 'store/interfaces'
+import ShippingMethod from './ShippingMethod'
+import PaymentMethod from './PaymentMethod'
+import PaypalButton from './Payment/PaypalButton'
+import axios from 'axios'
+import { clearCartAddress, setCartAddress } from 'store/reducers/cart'
+import { changeCheckoutStep, setOrder, placeOrder } from 'actions/checkout'
+import { getDefaultAddressSuccess } from 'actions/customer'
+import { getCustomerDefaultAddressesRequest } from "store/services/cart"
+import { handleCheckoutError, isCartValid } from 'utils/cart'
+import { publicKeysSelector } from "store/config.selector"
+import CardForm from './CardForm'
+import MomoButton from './Payment/MomoButton'
+import VNPayButton from './Payment/VNPayButton'
+import ZaloPayButton from './Payment/ZaloPayButton'
+import CustomerNotes from './CustomerNotes'
+import SummaryCart from './SummaryCart'
 
-const schema = yup.object().shape({
-  first_name: yup.string().required(),
-  last_name: yup.string().required(),
-  phone_number: yup.string().required(),
-  street: yup.string().required(),
-  city: yup.string().required(),
-  email: yup.string().email().required(),
-  zip_code: yup.string().required(),
-  state: yup.string().required(),
-  country: yup.string().required()
-})
+
+const { Step } = Steps
 
 const CheckoutContent = () => {
-  const items: any = []
-  const total = 0
-  const [steps] = useState(['Address', 'Delivery', 'Payment'])
-  const [activeStep, setActiveStep] = useState(0)
+  const [customerNotes, setCustomerNotes] = useState(false)
+  const { isGuest } = useSelector((state: any) => state.auth)
+  const checkout = useSelector((state: any) => state.checkout)
+  const cart = useSelector((state: any) => state.cart)
+  const customer = useSelector((state: any) => state.customer)
+  const config = useSelector((state: any) => state.config)
+  const publicKeys = useSelector(publicKeysSelector)
+  const [openLoginDialog, setOpenLoginDialog] = useState(false)
+  const dispatch = useDispatch()
+  let readyToPlaceOrder = isCartValid(cart, customer)
+  let supportEmail = config['site/support/email']
+  let percentDeposit = config['deposit_payment/percent_grand_total']
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
-    window.scrollTo({ top: 0 })
+  console.log('readyToPlaceOrder', readyToPlaceOrder);
+
+  const openCustomerNote = () => {
+    setCustomerNotes(!customerNotes)
   }
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1)
+  const scrollTo = (element, offset = 0, actions) => {
+    scroller.scrollTo(element, {
+      duration: 800,
+      delay: 0,
+      smooth: 'easeInOutQuart',
+      offset,
+      actions
+    })
   }
 
-  const methods = useForm<IAddress>({
-    resolver: yupResolver(schema)
-  })
+  const onStripeToken = async (token, isNew = true) => {
+    try {
+      let { data: { order, error } } = await axios.post('payments/createPayment', {
+        quoteId: cart._id,
+        shippingMethods: cart.shipping_methods,
+        promotion: cart.promotion,
+        method: 'stripe',
+        address: cart.address,
+        stripeData: { id: token.id, isNew },
+        credit: cart.credit,
+        note: cart.note,
+        refCode: window.localStorage.getItem('refCode')
+      })
+      if (error) handleCheckoutError(error, order)
+      else if (order) setOrder(order, true)
+    } catch (error) {
+      handleCheckoutError('Internal server error')
+    }
+  }
 
-  const handleSubmit: SubmitHandler<IAddress> = (address: IAddress) => {
-    console.log('address checkout', address)
-    handleNext()
+  const handlePaypalCheckout = async (paypalOrderId: any) => {
+    try {
+      let { data: { order, error } } = await axios.post('payments/createPayment', {
+        quoteId: cart._id,
+        shippingMethods: cart.shipping_methods,
+        promotion: cart.promotion,
+        method: 'paypal',
+        address: cart.address,
+        refCode: window.localStorage.getItem('refCode'),
+        paypalOrderId,
+        credit: cart.credit || 0,
+        note: cart.note
+      })
+      if (order) {
+        setOrder(order, true)
+      } else {
+        handleCheckoutError(error)
+      }
+    } catch (error) {
+      console.log(error.message)
+      handleCheckoutError('Internal server error')
+    }
+  }
+
+  const handlePlaceOrder = () => {
+    dispatch(placeOrder())
   }
 
   return (
-    <div className='container checkout-page-box'>
-      <div className='checkout-page-wrap'>
-        <div className='checkout-header'>
-          <div className='progress-cartBar'>
-            <Stepper activeStep={activeStep} alternativeLabel>
-              {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
-          </div>
+    <>
+      <div className='checkout-steps-content'>
+        <div className='checkoutHeader'>
+          <Steps size='small' direction='horizontal'>
+            <Step title='Address' status='process' />
+            <Step title='Delivery' status={['shipping', 'payment'].includes(checkout.step) ? 'process' : 'wait' }/>
+            <Step title='Payment' status={checkout.step === 'payment' ? 'process' : 'wait'} />
+          </Steps>
         </div>
-        <div className='checkout-content'>
-          <div className='column-address'>
-            <div></div>
-            <div
-              className={`step grow step-address ${
-                activeStep === 0 ? 'active' : ''
-              }`}
-            >
-              <h3>
-                <span className='number'>1</span>
-                Delivery Contact &amp; Address
-              </h3>
-              <div className='step-content'>
-                <FormProvider {...methods}>
-                  <form onSubmit={methods.handleSubmit(handleSubmit)}>
-                    <div className='address-form row'>
-                      <AddressForm />
-                    </div>
-                  </form>
-                </FormProvider>
+      </div>
+      <div className='container checkoutPageBox'>
+        <h1 style={{ display: 'none' }}>Secured Checkout</h1>
+        <div className='checkoutPage'>
+          <div className='checkoutMainBody'>
+            <div className='columnFirst'>
+              {isGuest ? (
+                <div className='loginLink'>
+                  <a onClick={(e) => { 
+                    if (isGuest) {
+                      e.preventDefault()
+                      setOpenLoginDialog(true)
+                    }}}
+                  >
+                    Already have an account? Log in.
+                  </a>
+                </div>
+              ) : (
+                <div />
+              )}
 
-                <button
-                  onClick={methods.handleSubmit(handleSubmit)}
-                  className='btn btnNextStep'
-                >
-                  Continue
-                </button>
+              <AddressStep scrollTo={scrollTo} />
+
+              <div className={'step grow stepShipping' + (checkout.step === CheckoutStep.Shipping ? ' active' : '')}>
+                <div className='shippingMethodForm'>
+                  <h3><span className='number'>2</span> Shipping Methods</h3>
+                  <ShippingMethod />
+                </div>
               </div>
-            </div>
-            <div
-              className={`step grow step-shipping ${
-                activeStep === 1 ? 'active' : ''
-              }`}
-            >
-              <h3>
-                <span className='number'>2</span>
-                Shipping methods
-              </h3>
-              <div className='step-content'>
-                <div className='shipping-options'>Can't get shipping cost</div>
-                <div className='buttons'>
-                  <button onClick={handleNext} className='btn btnNextStep'>
-                    Continue
-                  </button>
-                  <span onClick={handleBack} className='go-back'>
-                    Go back
-                  </span>
+
+              <div className={'step grow stepPayment' + (checkout.step === CheckoutStep.Payment ? ' active' : '')}>
+                <h3><span className='number'>3</span> Payment Methods</h3>
+                <div className='stepContent'>
+                  <PaymentMethod />
+                  <div className='buttons'>
+                    {cart.grand_total > 0 ? (
+                      <div className='col1 placeOrderBox'>
+                        {(() => {
+                          if (cart.payment_method && cart.payment_method.method === 'paypal') {
+                            return (
+                              <PaypalButton
+                                grandTotal={cart.grand_total}
+                                onSuccess={paypalOrderId => handlePaypalCheckout(paypalOrderId)} 
+                              />
+                            )
+                          } else if (cart.payment_method && cart.payment_method.method === 'stripe') {
+                            if (publicKeys.stripe) {
+                              let email = ''
+                              if (cart.address && cart.address.shipping && cart.address.shipping.email) {
+                                email = cart.address.shipping.email
+                              }
+                              if (!email) {
+                                if (customer && customer.email) email = customer.email
+                              }
+                              return (
+                                <CardForm
+                                  onGoBack={() => changeCheckoutStep('shipping')}
+                                  onToken={onStripeToken}
+                                />
+                              )
+                            } else {
+                              return null
+                            }
+                          } else if (cart.payment_method && cart.payment_method.method === 'momo') {
+                            return (
+                              <MomoButton />
+                            )
+                          }  else if (cart.payment_method && cart.payment_method.method === 'vnpay') {
+                            return (
+                              <VNPayButton />
+                            )
+                          } else if (cart.payment_method && cart.payment_method.method === 'zalopay') {
+                            return (
+                              <ZaloPayButton />
+                            )
+                          } else {
+                            return (
+                              <button onClick={handlePlaceOrder} className='btn' disabled={!readyToPlaceOrder}>
+                                Place Order Now 
+                              </button>
+                            )
+                          }
+                        })}
+                      </div>
+                    ) : (
+                      <button onClick={handlePlaceOrder} className='btn' disabled={!readyToPlaceOrder}>
+                        Place Order Now
+                      </button>
+                    )}
+                    {!(cart.payment_method && cart.payment_method.method === 'stripe') && (
+                      <div className='col2'>
+                        <span className='goBackBtn'
+                          onClick={() => scrollTo('stepPayment', -150, changeCheckoutStep('shipping'))}
+                        >
+                          Go back
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className='step grow active'>
+                <div className='shippingMethodForm note-order'>
+                  <h3 onClick={() => openCustomerNote()}>
+                    <span className='number'>4</span> Notes for Order 
+                  </h3>
+                  <span>optional</span>
+                  <CustomerNotes />
                 </div>
               </div>
             </div>
-            <div
-              className={`step grow step-payment ${
-                activeStep === 2 ? 'active' : ''
-              }`}
-            >
-              <h3>
-                <span className='number'>2</span>
-                Payment methods
-              </h3>
-              <div className='step-content'>
-                <div className='shipping-options'>Can't get shipping cost</div>
-                <div className='buttons'>
-                  <button className='btn place-order'>Place Order Now</button>
-                  <span onClick={handleBack} className='go-back'>
-                    Go back
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='column-cart-totals'>
-            <div className='checkout-sidebar'>
-              <p>
-                Need Assistance?&nbsp;
-                <a>cs@name.vn</a>
-              </p>
-              <div className='order-summary'>
-                <div className='cart-summary'>
-                  <div className='table-cart'>
-                    <div className='table'>
-                      {items.map((item: any) => (
-                        <div key={item.id} className='table-row table-conten'>
-                          <div className='table-cell'>
-                            <Image
-                              loader={imageLoader}
-                              src='/images/media/default.png'
-                              width={90}
-                              height={110}
-                              objectFit='contain'
-                              alt=''
-                            />
-                          </div>
-                          <div className='table-cell item-name'>
-                            Fit & Fresh Bento Lunch Set, Teal Pasiley
-                            <div className='item-qty'>Qty: {item.quantity}</div>
-                          </div>
-                          <div className='table-cell subtotal'>
-                            <p className='price'>${item.price}</p>
-                            {/* <p className='original-price'>
-                              $7.00
-                            </p> */}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className='cart-footer'>
-                    <div className='cart-total-wrap'>
-                      <div className='row-total'>
-                        <div className='title'>Subtotal</div>
-                        <span>${total}</span>
-                      </div>
-                      <div className='row-total'>
-                        <div className='title'>Discount</div>
-                        <span>- $0.00</span>
-                      </div>
-                      <div className='row-total'>
-                        <div className='title'>Tax</div>
-                        <span>$0.00</span>
-                      </div>
-                      <div className='row-total'>
-                        <div className='title'>Shipping Fee</div>
-                        <span>$0.00</span>
-                      </div>
-                      <div className='row-total row-grand-total'>
-                        <div className='title'>Gradn total incl tax</div>
-                        <span>${total}</span>
-                      </div>
-                    </div>
-                    <div className='coupon-box'>
-                      <div className='coupon-input'>
-                        <input
-                          className='input'
-                          type='text'
-                          placeholder='Coupon (Optional)'
-                        />
-                      </div>
-                      <button className='btn'>Apply</button>
-                    </div>
-                  </div>
+            <div className='columnSecond'>
+              <div className='checkoutSidebar'>
+                <p>Need Assistance?&nbsp;&nbsp;
+                  <span className='orange'><i className='fa fa-phone' />&nbsp;
+                    <b dir='ltr'><a href={'mailto:' + supportEmail}>{supportEmail}</a></b></span>
+                </p>
+                <div className='orderSummary'>
+                  <h3>Order Summary</h3>
+                  <SummaryCart percentDeposit={percentDeposit} />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <LoginDialog
+        openLoginDialog={openLoginDialog}
+        onClose={() => setOpenLoginDialog(false)}
+      />
+    </>
   )
 }
 

@@ -67,9 +67,9 @@ const Cart = (props: any) => {
   return (
     <Layout pageName='cartPage'>
       <NextSeo title='Shopping Cart' />
-      {/* {status === 'unauthorized' ? (
+      {status === 'unauthorized' ? (
         <LoginForm redirect={`/cart`} />
-      ) : !cartData.items?.length ? (
+      ) : !cart.items?.length ? (
         isCartLoading ? (
           <Loading height={160} width={400} speed={200} />
         ) : (
@@ -77,8 +77,7 @@ const Cart = (props: any) => {
         )
       ) : (
         <NewCartContent />
-      )} */}
-      <NewCartContent />
+      )}
     </Layout>
   )
 }

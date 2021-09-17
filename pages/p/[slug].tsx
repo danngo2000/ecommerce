@@ -10,7 +10,7 @@ import Error from 'components/Error'
 import { NextSeo } from 'next-seo'
 import { decodeHTML } from 'utils'
 import { useSelector } from 'react-redux'
-import ProductContent2 from 'components/Product/ProductConent/index2'
+import ProductContent from 'components/Product/ProductConent'
 
 const makeSeoDescription = (__product) => {
   const { description: d, short_description: sd } = __product
@@ -111,7 +111,7 @@ const Product = (props: any) => {
           <NextSeo {...buildSeoConfig(product, seoDescription)} />
           {/* ProductJsonLd */}
           {/* BreadcrumbJsonLd */}
-          <ProductContent2
+          <ProductContent
             customAttributesDetail={customAttributesDetail}
             description={product.description || ''}
             short_description={product.short_description || ''}

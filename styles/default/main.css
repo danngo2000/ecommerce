@@ -63,6 +63,7 @@
 @import 'partials/footer';
 @import 'pages/product';
 
+@import 'pages/checkout';
 @import 'partials/header';
 
 @import 'mixins/mediaquery';

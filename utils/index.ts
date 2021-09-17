@@ -5,6 +5,8 @@ import Countries from 'models/Static/Countries.json'
 import statesOnUs from 'models/Static/statesOnUs.json'
 // import { ICart, ICustomer } from '../interfaces'
 import axios from 'axios'
+import { ICart } from 'interfaces/ICart'
+import { ICustomer } from 'interfaces'
 
 export const delay = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms))
@@ -110,18 +112,18 @@ export const slugify = (value: string, udf?: boolean) => {
 //   return code
 // }
 
-// export const checkTestMode = async (cart?: ICart, customer?: ICustomer) => {
-//   try {
-//     let email = null
+export const checkTestMode = async (cart?: ICart, customer?: ICustomer) => {
+  try {
+    let email: any = null
 
-//     if (customer?.email) email = customer.email
-//     else if (cart?.address?.shipping) email = cart.address.shipping.email
+    if (customer?.email) email = customer.email
+    else if (cart?.address?.shipping) email = cart.address.shipping.email
 
-//     if (!email) return false
-//     let { data } = await axios.post('customers/dev', { email })
-//     return data
-//   } catch (e) {
-//     console.log(e.message)
-//     return false
-//   }
-// }
+    if (!email) return false
+    let { data } = await axios.post('customers/dev', { email })
+    return data
+  } catch (e) {
+    console.log(e.message)
+    return false
+  }
+}
